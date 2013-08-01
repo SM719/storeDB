@@ -17,7 +17,7 @@ public class Item {
 												+ "type char(30)," + "catagory char(30)," + "company char(50),"
 												+ "year char(5)," + "price char(10)," + "stock int," + "Primary Key(UPC))";
 	
-	private static final String dropTableItem = "DROP TABLE Item";
+	private static final String dropTableItem = "DROP TABLE Item CASCADE CONSTRAINTS";
 	
 	private static final String CreateItemSequence =
 			 "CREATE SEQUENCE item_counter\n"

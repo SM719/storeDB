@@ -18,6 +18,8 @@ import java.awt.event.*;
 import com.cs304.UIs.Login;
 
 import com.cs304.tables.Item;
+import com.cs304.tables.HasSong;
+import com.cs304.tables.LeadSinger;
 
 public class core {
 		//reads cmd line
@@ -27,6 +29,8 @@ public class core {
 	private static Connection connect;
 	
 	private static Item item;
+	private static HasSong hassong;
+	private static LeadSinger leadsinger;
 	Login Login;
 	
 	public core() throws InterruptedException {
@@ -42,16 +46,16 @@ public class core {
 		if (Login.checkConnection() == true) {
 			connect = Login.getConnecton();
 			try {
-				// borrower = new Borrower();
+				
 				item = new Item();
+				hassong = new HasSong();
+				leadsinger = new LeadSinger();
 				
-				// main UI starts here
-				
-				// Start point
+				// intialize point
 				MenuScreen();
-			} catch (ParseException e1) {
+			} catch (ParseException perror) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				perror.printStackTrace();
 			}
 	}
 	}
@@ -88,9 +92,18 @@ public class core {
 					break;
 				case 3:
 					item.insertItem(connect, 1, "testtitle", "cd", "rock", "TestRecords", "2001", "25.25", 52);
+					hassong.insertHasSong(connect, 1, "testtitleSong");
+					leadsinger.insertLeadSinger(connect, 1, "testsinger");
 					break;
 				case 4: 
 					item.showItem(connect);
+					hassong.showHasSong(connect);
+					leadsinger.showLeadSinger(connect);
+					break;
+				case 5:
+					item.deleteItem(connect, 1);
+					hassong.deleteHasSong(connect, 1);
+					leadsinger.deleteLeadSinger(connect, 1);
 					break;
 				
 				}
@@ -124,6 +137,8 @@ public class core {
 
 		try { 
 			item.createItem(connect);
+			hassong.createHasSong(connect);
+			leadsinger.createLeadSinger(connect);
 		} catch (SQLException e) {
 			System.out.println("Creating Tables failed");
 		}
@@ -132,6 +147,8 @@ public class core {
 	private void DAllTables(){
 		try{
 			item.dropItem(connect);
+			hassong.dropHasSong(connect);
+			leadsinger.dropLeadSinger(connect);
 		}catch (SQLException error) {
 			System.out.println ("drop table failed");
 			
