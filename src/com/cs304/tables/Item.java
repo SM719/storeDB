@@ -15,7 +15,7 @@ public class Item {
 	
 	private static final String createTableItem = "CREATE TABLE Item" + "(UPC int not null," + "title char(30)," 
 												+ "type char(30)," + "catagory char(30)," + "company char(50),"
-												+ "year char(5)," + "price char(10)," + "stock int," + "Primary Key(UPC))";
+												+ "year char(5)," + "price char(10)," + "stock int," + "PRIMARY KEY(UPC))";
 	
 	private static final String dropTableItem = "DROP TABLE Item CASCADE CONSTRAINTS";
 	
@@ -71,7 +71,7 @@ public class Item {
 			
 			int Colnum = data.getColumnCount();
 			
-			System.out.println(" space ");
+			System.out.println(" ");
 			
 			for (int i = 0; i < Colnum; i++) {
 				// returns column name

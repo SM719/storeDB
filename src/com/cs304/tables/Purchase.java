@@ -23,7 +23,7 @@ public class Purchase {
 													+ "PRIMARY KEY(receiptID),"
 													+ "FOREIGN KEY (CID) references Customer(CID) ON DELETE CASCADE)";
 	
-	private static final String dropTablePurchase = "DROP TABLE Purchase";
+	private static final String dropTablePurchase = "DROP TABLE Purchase CASCADE CONSTRAINTS";
 	
 	private static final String CreateSequence = "CREATE SEQUENCE PurchaseCounter\n" + "START WITH 1\n" +"INCREMENT BY 1";
 	private static final String DropSequence = "DROP SEQUENCE PurchaseCounter";
