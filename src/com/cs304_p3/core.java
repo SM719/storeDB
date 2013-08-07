@@ -20,6 +20,7 @@ import com.cs304.UIs.Login;
 import com.cs304.tables.Item;
 import com.cs304.tables.HasSong;
 import com.cs304.tables.LeadSinger;
+import javax.swing.JFrame;
 
 public class core {
 		//reads cmd line
@@ -130,6 +131,9 @@ public class core {
 	
 	public static void main(String args[]) throws InterruptedException {
 		core test = new core();
+				MenuBar Menu = new MenuBar();
+				//Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				
 
 	}
 	

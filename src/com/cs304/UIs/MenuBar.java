@@ -1,9 +1,9 @@
-package mainGUI;
+package com.cs304.UIs;
 import javax.swing.*;
 
-import Clerk.ClerkGUI;
-import Customer.CustomerGUI;
-import Manager.ManagerGUI;
+import com.cs304.clerkUI.ClerkGUI;
+//import Customer.CustomerGUI;
+//import Manager.ManagerGUI;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -41,7 +41,7 @@ public class MenuBar extends JFrame implements ActionListener {
 		if(event.getSource() == item1){
 			
 			
-			CustomerGUI customerGUI = new CustomerGUI();
+			//CustomerGUI customerGUI = new CustomerGUI();
 			
 			// closes on hitting X
 			//customerGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +60,7 @@ public class MenuBar extends JFrame implements ActionListener {
 			//clerkGUI.setVisible(true);
 		}
 		if(event.getSource() == item3){
-			ManagerGUI managerGUI = new ManagerGUI();
+			//ManagerGUI managerGUI = new ManagerGUI();
 			
 			//managerGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			//managerGUI.setSize(600, 600);

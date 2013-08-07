@@ -1,4 +1,4 @@
-package Clerk;
+package com.cs304.clerkUI;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
