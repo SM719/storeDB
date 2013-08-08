@@ -1,4 +1,4 @@
-package managerUI;
+package com.cs304.managerUI;
 
 
 import java.awt.Dimension;

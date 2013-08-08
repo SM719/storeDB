@@ -1,4 +1,4 @@
-package customerUI;
+package com.cs304.customerUI;
 //import java.awt.FlowLayout;
 //import javax.swing.JFrame;
 //import javax.swing.JLabel;
