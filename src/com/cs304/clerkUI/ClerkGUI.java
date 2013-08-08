@@ -29,7 +29,9 @@ public class ClerkGUI  {
 	private JButton processReturn;
 	
 	// constructor 
-	public ClerkGUI() {
+	public ClerkGUI(Connection con) {
+		
+		connection = con;
 		
 		Frame = new JFrame("Clerk Operations");
 		Frame.setVisible(true);

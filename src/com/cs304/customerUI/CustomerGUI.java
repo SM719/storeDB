@@ -33,10 +33,10 @@ public class CustomerGUI {
 	private JButton purchaseOnline;
 	
 	// constructor 
-	public CustomerGUI() {
+	public CustomerGUI(Connection con) {
 		
-		//f =frame;
-		//connection = con;
+		
+		connection = con;
 		
 		Frame = new JFrame("Customer Operations");
 		Frame.setVisible(true);

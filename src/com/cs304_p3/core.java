@@ -4,23 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
-import java.sql.*;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-
 
 import com.cs304.UIs.Login;
-
-import com.cs304.tables.Item;
+import com.cs304.UIs.MenuBar;
 import com.cs304.tables.HasSong;
+import com.cs304.tables.Item;
 import com.cs304.tables.LeadSinger;
-import javax.swing.JFrame;
 
 public class core {
 		//reads cmd line
@@ -75,12 +66,12 @@ public class core {
 			
 			while (!end){
 				System.out.print("\n\n TESTING PURPOSES \n\n");
-				System.out.print("1. Make every Table \n");
-				System.out.print("2. Drop every Table \n");
+				System.out.print("1. Make every Tables \n");
+				System.out.print("2. Drop every Tables \n");
 				System.out.print("3. individual test cases \n");
-				System.out.print("4. Show every Table \n");
-				System.out.print("5. Delete every Table \n");
-				System.out.print("6. Quit \n");
+				System.out.print("4. individual test cases \n");
+				System.out.print("5. individual test cases \n");
+				System.out.print("6. individual test cases \n");
 				mode = Integer.parseInt(BR.readLine());
 				System.out.println();
 				
@@ -106,9 +97,6 @@ public class core {
 					hassong.deleteHasSong(connect, 1);
 					leadsinger.deleteLeadSinger(connect, 1);
 					break;
-				case 6:
-					end = true;
-					break;
 				
 				}
 			}
@@ -133,8 +121,9 @@ public class core {
 	}
 	
 	public static void main(String args[]) throws InterruptedException {
-		//core test = new core();
-				MenuBar Menu = new MenuBar();
+				MenuBar Menu = new MenuBar(connect);		
+				core test = new core();
+				//ClerkGUI clerk = new ClerkGUI(connect);		
 				//Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				
 

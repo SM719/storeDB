@@ -32,11 +32,11 @@ public class ManagerGUI{
 	private JButton topSellers;
 	
 	// constructor 
-	public ManagerGUI() {
+	public ManagerGUI(Connection con) {
 		//Title
 		//super("Clerk View");
 		//setLayout( new FlowLayout());
-
+		connection = con;
 		//f =frame;
 		
 		Frame = new JFrame("Manager Operations");
