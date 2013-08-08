@@ -148,11 +148,14 @@ public class Registration {
 			if (event.getSource() == cancel) {
 				Frame.dispose();
 			} else if (event.getSource() == register) {
+<<<<<<< HEAD
 				if(ID.getText()  )
 				
 			}
+=======
+>>>>>>> 987c7b89ee9301ade74e71f05db77e7d8781b588
 
+			}
 		}
 	}
-
 }

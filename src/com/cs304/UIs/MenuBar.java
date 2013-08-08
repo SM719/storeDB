@@ -66,7 +66,7 @@ public class MenuBar implements ActionListener {
 		// TODO Auto-generated method stub
 		if (event.getSource() == item1) {
 
-			CustomerGUI customerGUI = new CustomerGUI(connection, F);
+			new CustomerGUI(connection, F);
 
 			// closes on hitting X
 			// customerGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,7 +76,7 @@ public class MenuBar implements ActionListener {
 		}
 		if (event.getSource() == item2) {
 
-			ClerkGUI clerkGUI = new ClerkGUI(connection, F);
+			new ClerkGUI(connection, F);
 
 			// closes on hitting X
 			// clerkGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,7 +85,7 @@ public class MenuBar implements ActionListener {
 		}
 		if (event.getSource() == item3) {
 
-			ManagerGUI managerGUI = new ManagerGUI(connection, F);
+			new ManagerGUI(connection, F);
 
 			// managerGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			// managerGUI.setSize(600, 600);
@@ -93,5 +93,4 @@ public class MenuBar implements ActionListener {
 		}
 
 	}
-
 }

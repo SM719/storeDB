@@ -229,7 +229,10 @@ public class core {
 
 			hassong.insertHasSong(connect, 6, "HolyGrail");
 			hassong.insertHasSong(connect, 6, "TomFord");
+<<<<<<< HEAD
 
+=======
+>>>>>>> 987c7b89ee9301ade74e71f05db77e7d8781b588
 			leadsinger.insertLeadSinger(connect, 6, "JayZ");
 			leadsinger.insertLeadSinger(connect, 6, "J.T");
 
