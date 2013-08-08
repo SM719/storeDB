@@ -11,28 +11,40 @@ import java.sql.Connection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class ManagerGUI {
+/*
+ * Top Selling Items: The user provides a date and a number, say n.
+ *  The system prints a list of the n best selling items on that day. 
+ *  For each best seller, the system shows the title, the company,
+ *  the current stock and the number of copies sold. 
+ *  The output should be ordered according to sales: 
+ *  the best selling item should be first, the second best will follow, etc.
+ */
 
+public class TopSellers {
+
+	// UNCOMMENT LATER
 	Connection connection;
 
 	private JFrame Frame;
 
-	private JButton addItem;
-	private JButton processDelivery;
-	private JButton salesReport;
-	private JButton topSellers;
+	private JLabel item1;
+	private JTextField date;
+	private JTextField num;
+
+	private JButton display;
+	private JButton cancel;
 
 	// constructor
-	public ManagerGUI(Connection con) {
-		// Title
-		// super("Clerk View");
-		// setLayout( new FlowLayout());
-		connection = con;
-		// f =frame;
+	public TopSellers(Connection con) {
 
-		Frame = new JFrame("Manager Operations");
+		// f =frame;
+		connection = con;
+
+		Frame = new JFrame("Top Selling Items");
 		Frame.setVisible(true);
 		Frame.setSize(400, 300);
 		Dimension d = Frame.getToolkit().getScreenSize();
@@ -44,44 +56,45 @@ public class ManagerGUI {
 
 		JPanel panel = new JPanel();
 
-		addItem = new JButton("Add items to the store");
-		processDelivery = new JButton("Process the delivery of an order");
-		salesReport = new JButton("Show daily sales report");
-		topSellers = new JButton("Best selling items");
+		date = new JTextField("Enter the date: ??/??/??");
+		num = new JTextField("Enter the number of items:");
+		display = new JButton("Search");
+		cancel = new JButton("Cancel");
 
 		g.gridx = 0;
 		g.gridy = 1;
 		g.gridwidth = 5;
 		g.fill = GridBagConstraints.HORIZONTAL;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(addItem, g);
-		panel.add(addItem);
+		gb.setConstraints(date, g);
+		panel.add(date);
 
 		g.gridx = 0;
 		g.gridy = 2;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(processDelivery, g);
-		panel.add(processDelivery);
+		gb.setConstraints(num, g);
+		panel.add(num);
 
 		g.gridx = 0;
 		g.gridy = 3;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(salesReport, g);
-		panel.add(salesReport);
+		gb.setConstraints(display, g);
+		panel.add(display);
 
 		g.gridx = 0;
 		g.gridy = 4;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(topSellers, g);
-		panel.add(topSellers);
+		gb.setConstraints(cancel, g);
+		panel.add(cancel);
 
 		panel.setLayout(gb);
 
 		theHandler Handler = new theHandler();
-		addItem.addActionListener(Handler);
-		processDelivery.addActionListener(Handler);
-		salesReport.addActionListener(Handler);
-		topSellers.addActionListener(Handler);
+		date.addActionListener(Handler);
+		num.addActionListener(Handler);
+
+		display.addActionListener(Handler);
+		cancel.addActionListener(Handler);
 
 		Frame.add(panel);
 	}
@@ -91,9 +104,7 @@ public class ManagerGUI {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			if (event.getSource() == topSellers) {
-				TopSellers topSeller = new TopSellers(connection);
-			}
+
 		}
 
 	}

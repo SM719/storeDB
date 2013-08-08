@@ -1,4 +1,5 @@
 package com.cs304.customerUI;
+
 //import java.awt.FlowLayout;
 //import javax.swing.JFrame;
 //import javax.swing.JLabel;
@@ -15,7 +16,6 @@ import java.sql.Connection;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -29,27 +29,27 @@ import javax.swing.JTextField;
 
 public class Registration {
 
-	//UNCOMMENT LATER
+	// UNCOMMENT LATER
 	Connection connection;
-	
+
 	private JFrame Frame;
-	
+
 	private JLabel item1;
 	private JTextField name;
 	private JTextField address;
 	private JTextField phone;
 	private JTextField ID;
 	private JTextField password;
-	
+
 	private JButton register;
 	private JButton cancel;
-	
-	// constructor 
+
+	// constructor
 	public Registration() {
-		
-		//f =frame;
-		//connection = con;
-		
+
+		// f =frame;
+		// connection = con;
+
 		Frame = new JFrame("Customer Registration");
 		Frame.setVisible(true);
 		Frame.setSize(500, 400);
@@ -59,9 +59,9 @@ public class Registration {
 
 		GridBagLayout gb = new GridBagLayout();
 		GridBagConstraints g = new GridBagConstraints();
-		
+
 		JPanel panel = new JPanel();
-		
+
 		name = new JTextField("Enter your name");
 		address = new JTextField("Enter your address");
 		phone = new JTextField("Enter your phone number");
@@ -69,8 +69,7 @@ public class Registration {
 		password = new JTextField("Enter your password");
 		register = new JButton("Register");
 		cancel = new JButton("Cancel");
-		
-		
+
 		g.gridx = 0;
 		g.gridy = 1;
 		g.gridwidth = 5;
@@ -82,41 +81,41 @@ public class Registration {
 		g.gridx = 0;
 		g.gridy = 2;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(address ,g);
+		gb.setConstraints(address, g);
 		panel.add(address);
-		
+
 		g.gridx = 0;
 		g.gridy = 3;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(phone ,g);
+		gb.setConstraints(phone, g);
 		panel.add(phone);
-		
+
 		g.gridx = 0;
 		g.gridy = 4;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(ID ,g);
+		gb.setConstraints(ID, g);
 		panel.add(ID);
-		
+
 		g.gridx = 0;
 		g.gridy = 5;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(password ,g);
+		gb.setConstraints(password, g);
 		panel.add(password);
-		
+
 		g.gridx = 0;
 		g.gridy = 6;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(register ,g);
+		gb.setConstraints(register, g);
 		panel.add(register);
-		
+
 		g.gridx = 0;
 		g.gridy = 7;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(cancel ,g);
+		gb.setConstraints(cancel, g);
 		panel.add(cancel);
-		
+
 		panel.setLayout(gb);
-		
+
 		theHandler Handler = new theHandler();
 		register.addActionListener(Handler);
 		cancel.addActionListener(Handler);
@@ -125,20 +124,18 @@ public class Registration {
 		phone.addActionListener(Handler);
 		ID.addActionListener(Handler);
 		password.addActionListener(Handler);
-		
-		
+
 		Frame.add(panel);
 	}
-	
+
 	// takes one method, whenever an event occurs
-	private class theHandler implements ActionListener{
+	private class theHandler implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			
+
 		}
-		
-		
+
 	}
-	
+
 }
