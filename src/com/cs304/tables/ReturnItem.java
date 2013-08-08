@@ -102,8 +102,8 @@ public class ReturnItem {
 		try {
 			p = connect.prepareStatement("INSERT INTO ReturnItem VALUES (?,?,?)");
 			
-			p.setInt(1, UPC);
-			p.setInt(2, retID);
+			p.setInt(2, UPC);
+			p.setInt(1, retID);
 			p.setInt(3, quantity);
 			
 			p.executeUpdate();

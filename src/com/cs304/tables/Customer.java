@@ -14,10 +14,10 @@ public class Customer{
 	private static final String createTableCustomer = "CREATE TABLE Customer"
 														+ "(CID int not null,"
 														+ "password char(30) not null,"
-														+ "name char (30),"
+														+ "name char(30),"
 														+ "address char(30),"
 														+ "phone char(15),"
-														+ "Primary Key (CID))";
+														+ "PRIMARY KEY (CID))";
 	
 	private static final String dropTableCustomer = "DROP TABLE Customer CASCADE CONSTRAINTS";
 	
@@ -64,7 +64,7 @@ public class Customer{
 			
 			int Colnum = data.getColumnCount();
 			
-			System.out.println(" space ");
+			System.out.println(" ");
 			
 			for (int i = 0; i < Colnum; i++) {
 				// returns column name
@@ -75,11 +75,15 @@ public class Customer{
 			
 			while(r.next())
 			{
-				CID = r.getString("CID");
-				System.out.printf("%-10.10",CID ); 
+				CID = r.getString("cid");
+				System.out.printf("%-10.10s", CID);
 				
 				Password = r.getString("password");
-				System.out.printf("%-20.20", Password);
+				if (r.wasNull()) {
+					System.out.printf("%-20.20s", " ");
+				} else {
+					System.out.printf("%-20.20s", Password);
+				}
 				
 				name = r.getString("name");
 				if (r.wasNull()) {
@@ -92,7 +96,7 @@ public class Customer{
 				if (r.wasNull()) {
 					System.out.printf("%-20.20s", " ");
 				} else {
-					System.out.printf("%-20.20s", address);
+				System.out.printf("%-20.20s", address);
 				}
 				
 				phone = r.getString("phone");

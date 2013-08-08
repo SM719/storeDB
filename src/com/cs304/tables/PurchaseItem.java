@@ -102,8 +102,8 @@ public class PurchaseItem {
 		try {
 			p = connect.prepareStatement("INSERT INTO PurchaseItem VALUES (?,?,?)");
 			
-			p.setInt(1, UPC);
-			p.setInt(2, receiptID);
+			p.setInt(2, UPC);
+			p.setInt(1, receiptID);
 			p.setInt(3, quantity);
 			
 			p.executeUpdate();

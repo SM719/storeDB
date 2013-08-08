@@ -14,9 +14,9 @@ public class Return {
 	
 	private static final String createTableReturn = "CREATE TABLE Return"
 													+ "(retid int not null,"
-													+ "date Date,"
-													+ "receiptID int not null"
-													+ "PRIMARY KEY (RETID),"
+													+ "rdate Date,"
+													+ "receiptID int not null,"
+													+ "PRIMARY KEY (retid),"
 													+ "FOREIGN KEY (receiptID) references Purchase(receiptID))";
 	
 	private static final String dropTableReturn = "DROP TABLE Return CASCADE CONSTRAINTS";
@@ -109,8 +109,13 @@ public void insertReturn (Connection connect, int receiptID)
 		GregorianCalendar calendar = new GregorianCalendar();
 		
 		java.sql.Date sDate = new java.sql.Date(calendar.getTime().getTime());
-		p.setDate(2, sDate);
-		p.setInt(3, receiptid);
+		p.setDate(1, sDate);
+		p.setInt(2, receiptid);
+
+		p.executeUpdate();
+		connect.commit();
+		p.close();
+		
 	}catch (SQLException error)
 	{
 	System.out.println ("Insertion Error \n");
