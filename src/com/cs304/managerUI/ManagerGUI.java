@@ -103,6 +103,7 @@ public class ManagerGUI {
 			} else if (event.getSource() == topSellers) {
 				new TopSellers(connection);
 			}
+
 		}
 
 	}
