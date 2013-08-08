@@ -12,27 +12,28 @@ import java.sql.Connection;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class ManagerGUI {
+public class AddItems {
 
 	Connection connection;
 
 	private JFrame Frame;
 
-	private JButton addItem;
-	private JButton processDelivery;
-	private JButton salesReport;
-	private JButton topSellers;
+	private JTextField UPC;
+	private JTextField quantity;
+	private JTextField price;
 
-	// constructor
-	public ManagerGUI(Connection con) {
-		// Title
-		// super("Clerk View");
-		// setLayout( new FlowLayout());
-		connection = con;
+	private JButton add;
+	private JButton cancel;
+
+	public AddItems(Connection connection) {
+		// TODO Auto-generated constructor stub
+
 		// f =frame;
+		this.connection = connection;
 
-		Frame = new JFrame("Manager Operations");
+		Frame = new JFrame("Sales Report");
 		Frame.setVisible(true);
 		Frame.setSize(400, 300);
 		Dimension d = Frame.getToolkit().getScreenSize();
@@ -44,44 +45,52 @@ public class ManagerGUI {
 
 		JPanel panel = new JPanel();
 
-		addItem = new JButton("Add items to the store");
-		processDelivery = new JButton("Process the delivery of an order");
-		salesReport = new JButton("Show daily sales report");
-		topSellers = new JButton("Best selling items");
+		UPC = new JTextField("Enter the item UPC:");
+		quantity = new JTextField("Enter the quantity:");
+		price = new JTextField("(Optional)Enter the item price:");
+		add = new JButton("Add Item");
+		cancel = new JButton("Cancel");
 
 		g.gridx = 0;
 		g.gridy = 1;
 		g.gridwidth = 5;
 		g.fill = GridBagConstraints.HORIZONTAL;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(addItem, g);
-		panel.add(addItem);
+		gb.setConstraints(UPC, g);
+		panel.add(UPC);
 
 		g.gridx = 0;
 		g.gridy = 2;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(processDelivery, g);
-		panel.add(processDelivery);
+		gb.setConstraints(quantity, g);
+		panel.add(quantity);
 
 		g.gridx = 0;
 		g.gridy = 3;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(salesReport, g);
-		panel.add(salesReport);
+		gb.setConstraints(price, g);
+		panel.add(price);
 
 		g.gridx = 0;
 		g.gridy = 4;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(topSellers, g);
-		panel.add(topSellers);
+		gb.setConstraints(add, g);
+		panel.add(add);
+
+		g.gridx = 0;
+		g.gridy = 5;
+		g.insets = new Insets(10, 10, 10, 10);
+		gb.setConstraints(cancel, g);
+		panel.add(cancel);
 
 		panel.setLayout(gb);
 
 		theHandler Handler = new theHandler();
-		addItem.addActionListener(Handler);
-		processDelivery.addActionListener(Handler);
-		salesReport.addActionListener(Handler);
-		topSellers.addActionListener(Handler);
+		UPC.addActionListener(Handler);
+		quantity.addActionListener(Handler);
+		price.addActionListener(Handler);
+		add.addActionListener(Handler);
+		cancel.addActionListener(Handler);
 
 		Frame.add(panel);
 	}
@@ -91,16 +100,9 @@ public class ManagerGUI {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			if (event.getSource() == addItem) {
-				new AddItems(connection);
-			} else if (event.getSource() == processDelivery) {
-				new ProcessDeliveryUI(connection);
-			} else if (event.getSource() == salesReport) {
-				new SalesReportUI(connection);
-			} else if (event.getSource() == topSellers) {
-				new TopSellers(connection);
+			if (event.getSource() == cancel) {
+				Frame.dispose();
 			}
-
 		}
 
 	}
