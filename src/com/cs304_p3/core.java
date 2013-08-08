@@ -11,6 +11,7 @@ import com.cs304.UIs.Login;
 import com.cs304.tables.HasSong;
 import com.cs304.tables.Item;
 import com.cs304.tables.LeadSinger;
+import com.cs304.tables.Purchase;
 
 public class core {
 	// reads cmd line
@@ -22,6 +23,7 @@ public class core {
 	private static Item item;
 	private static HasSong hassong;
 	private static LeadSinger leadsinger;
+	private static Purchase purcahse;
 	Login Login;
 
 	public core() throws InterruptedException {
@@ -41,6 +43,7 @@ public class core {
 				item = new Item();
 				hassong = new HasSong();
 				leadsinger = new LeadSinger();
+				purcahse = new Purchase();
 
 				// Initialize point
 				MenuScreen();
@@ -81,11 +84,14 @@ public class core {
 							"TestRecords", "2001", "25.25", 52);
 					hassong.insertHasSong(connect, 1, "testtitleSong");
 					leadsinger.insertLeadSinger(connect, 1, "testsinger");
+					// showPurchase.insertPurcahse(connect, )
+
 					break;
 				case 4:
 					item.showItem(connect);
 					hassong.showHasSong(connect);
 					leadsinger.showLeadSinger(connect);
+					// purcahse.showPurchase(connect);
 					break;
 				case 5:
 					item.deleteItem(connect, 1);
@@ -128,6 +134,7 @@ public class core {
 			item.createItem(connect);
 			hassong.createHasSong(connect);
 			leadsinger.createLeadSinger(connect);
+			purcahse.createPurchase(connect);
 		} catch (SQLException e) {
 			System.out.println("Creating Tables failed");
 		}
@@ -138,6 +145,7 @@ public class core {
 			item.dropItem(connect);
 			hassong.dropHasSong(connect);
 			leadsinger.dropLeadSinger(connect);
+			purcahse.dropPurchase(connect);
 		} catch (SQLException error) {
 			System.out.println("drop table failed");
 
