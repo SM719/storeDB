@@ -222,7 +222,7 @@ public class core {
 			leadsinger.insertLeadSinger(connect, 7, "KanyeWest");
 
 			hassong.insertHasSong(connect, 8, "InDaClub");
-			leadsinger.insertLeadSinger(connect, 1, "50Cent");
+			leadsinger.insertLeadSinger(connect, 8, "50Cent");
 
 			hassong.insertHasSong(connect, 9, "WakeMeUp");
 			leadsinger.insertLeadSinger(connect, 9, "Avicii");

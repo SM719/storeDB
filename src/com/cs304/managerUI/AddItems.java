@@ -138,18 +138,21 @@ public class AddItems {
 					try {
 						con.setAutoCommit(false);
 						Statement state = con.createStatement();
-						ResultSet r = state
-								.executeQuery("SELECT UPC FROM Item");
+						ResultSet r = state.executeQuery("SELECT * FROM Item");
 						System.out.println("test2");
 						while (r.next()) {
 							int upc = r.getInt("UPC");
-							String price = r.getString("price");
+							// String price = r.getString("price");
+							// int stock =
+							// Integer.parseInt(r.getString("stock"));
+							System.out.println("test3");
 							int stock = r.getInt("stock");
+							System.out.println("test4");
 							if (upc == Integer.parseInt(UPC.getText())) {
 								if (Integer.parseInt(quantity.getText()) > 0) {
 									stock += Integer.parseInt(quantity
 											.getText());
-
+									new Item().updateStock(con, stock);
 								}
 							}
 						}
