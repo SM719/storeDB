@@ -87,7 +87,7 @@ public class CustomerGUI {
 				Registration register = new Registration();
 			}
 			else if(event.getSource() == purchaseOnline ){
-				//Purchase purchase = new Purchase();
+				Purchase purchase = new Purchase();
 			}
 		}
 		
