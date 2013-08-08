@@ -54,20 +54,19 @@ public class core {
 
 	private void MenuScreen() throws ParseException {
 		int mode;
-		boolean end;
-		end = false;
+		boolean end = false;
 
 		try {
 			connect.setAutoCommit(false);
 
 			while (!end) {
 				System.out.print("\n\n TESTING PURPOSES \n\n");
-				System.out.print("1. Make every Tables \n");
-				System.out.print("2. Drop every Tables \n");
+				System.out.print("1. Make every Table \n");
+				System.out.print("2. Drop every Table \n");
 				System.out.print("3. individual test cases \n");
-				System.out.print("4. individual test cases \n");
-				System.out.print("5. individual test cases \n");
-				System.out.print("6. individual test cases \n");
+				System.out.print("4. Show every Table \n");
+				System.out.print("5. Delete every Table \n");
+				System.out.print("6. Quit \n");
 				mode = Integer.parseInt(BR.readLine());
 				System.out.println();
 
@@ -93,6 +92,9 @@ public class core {
 					item.deleteItem(connect, 1);
 					hassong.deleteHasSong(connect, 1);
 					leadsinger.deleteLeadSinger(connect, 1);
+					break;
+				case 6:
+					end = true;
 					break;
 
 				}
