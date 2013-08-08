@@ -20,9 +20,7 @@ public class AddItems {
 
 	private JFrame Frame;
 
-	private JTextField UPC;
-	private JTextField quantity;
-	private JTextField price;
+	private JTextField UPC, quantity, price, songs, singers;
 
 	private JButton add;
 	private JButton cancel;
@@ -33,9 +31,9 @@ public class AddItems {
 		// f =frame;
 		this.connection = connection;
 
-		Frame = new JFrame("Sales Report");
+		Frame = new JFrame("Add Item");
 		Frame.setVisible(true);
-		Frame.setSize(400, 300);
+		Frame.setSize(500, 400);
 		Dimension d = Frame.getToolkit().getScreenSize();
 		Rectangle r = Frame.getBounds();
 		Frame.setLocation((d.width - r.width) / 2, (d.height - r.height) / 2);
@@ -45,15 +43,18 @@ public class AddItems {
 
 		JPanel panel = new JPanel();
 
-		UPC = new JTextField("Enter the item UPC:");
+		UPC = new JTextField("Enter CD/DVD UPC:");
 		quantity = new JTextField("Enter the quantity:");
-		price = new JTextField("(Optional)Enter the item price:");
+		price = new JTextField("(Optional) Enter the item price:");
+		songs = new JTextField("Enter songs (seperated by comma");
+		singers = new JTextField("Enter singers (seperated by comma)");
+
 		add = new JButton("Add Item");
 		cancel = new JButton("Cancel");
 
 		g.gridx = 0;
 		g.gridy = 1;
-		g.gridwidth = 5;
+		g.gridwidth = 7;
 		g.fill = GridBagConstraints.HORIZONTAL;
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(UPC, g);
@@ -82,6 +83,18 @@ public class AddItems {
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(cancel, g);
 		panel.add(cancel);
+
+		g.gridx = 0;
+		g.gridy = 6;
+		g.insets = new Insets(10, 10, 10, 10);
+		gb.setConstraints(songs, g);
+		panel.add(songs);
+
+		g.gridx = 0;
+		g.gridy = 7;
+		g.insets = new Insets(10, 10, 10, 10);
+		gb.setConstraints(singers, g);
+		panel.add(singers);
 
 		panel.setLayout(gb);
 
