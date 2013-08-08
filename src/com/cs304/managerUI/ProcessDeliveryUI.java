@@ -18,17 +18,17 @@ public class ProcessDeliveryUI {
 
 	Connection connection;
 
-	private JFrame Frame;
+	private JFrame Frame, fr;
 
 	private JTextField date;
 
 	private JButton setDate;
 	private JButton cancel;
 
-	public ProcessDeliveryUI(Connection connection) {
+	public ProcessDeliveryUI(Connection connection, JFrame f) {
 		// TODO Auto-generated constructor stub
 
-		// f =frame;
+		fr = f;
 		this.connection = connection;
 
 		Frame = new JFrame("Process order delivery");

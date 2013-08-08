@@ -18,7 +18,7 @@ public class AddItems {
 
 	Connection connection;
 
-	private JFrame Frame;
+	private JFrame Frame, fr;
 
 	private JTextField UPC;
 	private JTextField quantity;
@@ -27,10 +27,10 @@ public class AddItems {
 	private JButton add;
 	private JButton cancel;
 
-	public AddItems(Connection connection) {
+	public AddItems(Connection connection, JFrame f) {
 		// TODO Auto-generated constructor stub
 
-		// f =frame;
+		fr = f;
 		this.connection = connection;
 
 		Frame = new JFrame("Sales Report");

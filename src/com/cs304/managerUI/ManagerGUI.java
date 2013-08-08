@@ -17,7 +17,7 @@ public class ManagerGUI {
 
 	Connection connection;
 
-	private JFrame Frame;
+	private JFrame Frame, fr;
 
 	private JButton addItem;
 	private JButton processDelivery;
@@ -25,12 +25,12 @@ public class ManagerGUI {
 	private JButton topSellers;
 
 	// constructor
-	public ManagerGUI(Connection con) {
+	public ManagerGUI(Connection con, JFrame f) {
 		// Title
 		// super("Clerk View");
 		// setLayout( new FlowLayout());
 		connection = con;
-		// f =frame;
+		fr = f;
 
 		Frame = new JFrame("Manager Operations");
 		Frame.setVisible(true);
@@ -93,13 +93,13 @@ public class ManagerGUI {
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == addItem) {
 				// Just an empty message till we decide on implementation
-				new AddItems(connection);
+				new AddItems(connection, fr);
 			} else if (event.getSource() == processDelivery) {
-				new ProcessDeliveryUI(connection);
+				new ProcessDeliveryUI(connection, fr);
 			} else if (event.getSource() == salesReport) {
-				new SalesReportUI(connection);
+				new SalesReportUI(connection, fr);
 			} else if (event.getSource() == topSellers) {
-				new TopSellers(connection);
+				new TopSellers(connection, fr);
 			}
 
 		}

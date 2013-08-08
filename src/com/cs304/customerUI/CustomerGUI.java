@@ -23,7 +23,7 @@ public class CustomerGUI {
 	// UNCOMMENT LATER
 	Connection connection;
 
-	private JFrame Frame;
+	private JFrame Frame, fr;
 
 	private JLabel item1;
 
@@ -31,9 +31,10 @@ public class CustomerGUI {
 	private JButton purchaseOnline;
 
 	// constructor
-	public CustomerGUI(Connection con) {
+	public CustomerGUI(Connection con, JFrame f) {
 
 		connection = con;
+		fr = f;
 
 		Frame = new JFrame("Customer Operations");
 		Frame.setVisible(true);
@@ -80,9 +81,9 @@ public class CustomerGUI {
 		public void actionPerformed(ActionEvent event) {
 
 			if (event.getSource() == register) {
-				new Registration();
+				new Registration(connection, fr);
 			} else if (event.getSource() == purchaseOnline) {
-				new Purchase();
+				new Purchase(connection, fr);
 			}
 		}
 

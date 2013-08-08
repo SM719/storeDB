@@ -32,7 +32,7 @@ public class Registration {
 	// UNCOMMENT LATER
 	Connection connection;
 
-	private JFrame Frame;
+	private JFrame Frame, fr;
 
 	private JLabel item1;
 	private JTextField name;
@@ -45,10 +45,10 @@ public class Registration {
 	private JButton cancel;
 
 	// constructor
-	public Registration() {
+	public Registration(Connection con, JFrame f) {
 
-		// f =frame;
-		// connection = con;
+		fr = f;
+		connection = con;
 
 		Frame = new JFrame("Customer Registration");
 		Frame.setVisible(true);
