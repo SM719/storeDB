@@ -15,7 +15,7 @@ import com.cs304.tables.LeadSinger;
 
 public class core {
 		//reads cmd line
-	
+	///Qais is a goof
 	private BufferedReader BR = new BufferedReader (new InputStreamReader(System.in));
 	
 	private static Connection connect;
