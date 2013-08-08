@@ -92,7 +92,6 @@ public class ManagerGUI {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == addItem) {
-				// Just an empty message till we decide on implementation
 				new AddItems(connection);
 			} else if (event.getSource() == processDelivery) {
 				new ProcessDeliveryUI(connection);

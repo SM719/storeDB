@@ -8,11 +8,17 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.cs304.tables.Item;
 
 public class AddItems {
 
@@ -20,7 +26,7 @@ public class AddItems {
 
 	private JFrame Frame;
 
-	private JTextField UPC, quantity, price, songs, singers;
+	private JTextField UPC, quantity, price;
 
 	private JButton add;
 	private JButton cancel;
@@ -33,7 +39,7 @@ public class AddItems {
 
 		Frame = new JFrame("Add Item");
 		Frame.setVisible(true);
-		Frame.setSize(500, 400);
+		Frame.setSize(400, 300);
 		Dimension d = Frame.getToolkit().getScreenSize();
 		Rectangle r = Frame.getBounds();
 		Frame.setLocation((d.width - r.width) / 2, (d.height - r.height) / 2);
@@ -44,10 +50,8 @@ public class AddItems {
 		JPanel panel = new JPanel();
 
 		UPC = new JTextField("Enter CD/DVD UPC:");
-		quantity = new JTextField("Enter the quantity:");
-		price = new JTextField("(Optional) Enter the item price:");
-		songs = new JTextField("Enter songs (seperated by comma");
-		singers = new JTextField("Enter singers (seperated by comma)");
+		quantity = new JTextField("Enter item quantity:");
+		price = new JTextField("Enter item price if different:");
 
 		add = new JButton("Add Item");
 		cancel = new JButton("Cancel");
@@ -84,21 +88,9 @@ public class AddItems {
 		gb.setConstraints(cancel, g);
 		panel.add(cancel);
 
-		g.gridx = 0;
-		g.gridy = 4;
-		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(songs, g);
-		panel.add(songs);
-
-		g.gridx = 0;
-		g.gridy = 5;
-		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(singers, g);
-		panel.add(singers);
-
 		panel.setLayout(gb);
 
-		theHandler Handler = new theHandler();
+		theHandler Handler = new theHandler(this.connection);
 		UPC.addActionListener(Handler);
 		quantity.addActionListener(Handler);
 		price.addActionListener(Handler);
@@ -110,14 +102,71 @@ public class AddItems {
 
 	// takes one method, whenever an event occurs
 	private class theHandler implements ActionListener {
+		Connection con;
+
+		public theHandler(Connection connection) {
+			this.con = connection;
+		}
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == cancel) {
 				Frame.dispose();
+			} else if (event.getSource() == add) {
+
+				// Below if statements ensure only valid UPC, quantity and
+				// prices are entered
+				if ((UPC.getText().equals("Enter CD/DVD UPC:"))
+						|| (UPC.getText().equals(""))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Please Enter UPC");
+				} else if (!(UPC.getText().matches("[0-9]+"))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: UPC can only contain numbers");
+				} else if ((quantity.getText().equals(""))
+						|| (quantity.getText().equals("Enter the quantity:"))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Please Enter Quantity");
+				} else if (!(quantity.getText().matches("[0-9]+"))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Quantity can only contain numbers");
+				} else if (!(price.getText().matches("[0-9]+"))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Price can only contain numbers");
+				} else {
+					System.out.println(UPC.getText());
+					try {
+						con.setAutoCommit(false);
+						Statement state = con.createStatement();
+						ResultSet r = state
+								.executeQuery("SELECT UPC FROM Item");
+						System.out.println("test2");
+						while (r.next()) {
+							int upc = r.getInt("UPC");
+							String price = r.getString("price");
+							int stock = r.getInt("stock");
+							if (upc == Integer.parseInt(UPC.getText())) {
+								if (Integer.parseInt(quantity.getText()) > 0) {
+									stock += Integer.parseInt(quantity
+											.getText());
+
+								}
+							}
+						}
+						// System.out.println(upc);
+
+						System.out.println("test3");
+						new Item().insertItem(con, 54, "testtitle", "cd",
+								"rock", "TestRecords", "2001", "25.25", 52);
+						con.commit();
+						state.close();
+					} catch (SQLException error) {
+						System.out.println(error.getMessage());
+					}
+
+				}
 			}
 		}
-
 	}
 
 }
