@@ -94,6 +94,7 @@ public class ManagerGUI {
 			if (event.getSource() == topSellers) {
 				TopSellers topSeller = new TopSellers(connection);
 			}
+
 		}
 
 	}
