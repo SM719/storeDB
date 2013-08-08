@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-
 public class Login implements ActionListener {
 
 	private Connection con;
@@ -164,6 +163,7 @@ public class Login implements ActionListener {
 			// remove the login window and display a text menu
 			mainFrame.dispose();
 			connected = true;
+			new MenuBar(con);
 		} else {
 			loginAttempts++;
 

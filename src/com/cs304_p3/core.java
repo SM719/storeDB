@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import com.cs304.UIs.Login;
-import com.cs304.UIs.MenuBar;
 import com.cs304.tables.HasSong;
 import com.cs304.tables.Item;
 import com.cs304.tables.LeadSinger;
@@ -117,7 +116,6 @@ public class core {
 	}
 
 	public static void main(String args[]) throws InterruptedException {
-		new MenuBar(connect);
 		new core();
 		// ClerkGUI clerk = new ClerkGUI(connect);
 		// Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
