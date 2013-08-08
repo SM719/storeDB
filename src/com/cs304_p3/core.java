@@ -14,23 +14,23 @@ import com.cs304.tables.Item;
 import com.cs304.tables.LeadSinger;
 
 public class core {
-		//reads cmd line
-	
-	private BufferedReader BR = new BufferedReader (new InputStreamReader(System.in));
-	
+	// reads cmd line
+	private BufferedReader BR = new BufferedReader(new InputStreamReader(
+			System.in));
+
 	private static Connection connect;
-	
+
 	private static Item item;
 	private static HasSong hassong;
 	private static LeadSinger leadsinger;
 	Login Login;
-	
+
 	public core() throws InterruptedException {
-		
-		Login = new Login ();
-		
-		while(true) {
-			Thread.sleep (9000);
+
+		Login = new Login();
+
+		while (true) {
+			Thread.sleep(9000);
 			if (Login.checkConnection()) {
 				break;
 			}
@@ -38,33 +38,29 @@ public class core {
 		if (Login.checkConnection() == true) {
 			connect = Login.getConnecton();
 			try {
-				
+
 				item = new Item();
 				hassong = new HasSong();
 				leadsinger = new LeadSinger();
-				
-				// intialize point
+
+				// Initialize point
 				MenuScreen();
 			} catch (ParseException perror) {
 				// TODO Auto-generated catch block
 				perror.printStackTrace();
 			}
+		}
 	}
-	}
-	
-	
-	
-	
-	
-	private void MenuScreen () throws ParseException {
+
+	private void MenuScreen() throws ParseException {
 		int mode;
 		boolean end;
 		end = false;
-		
+
 		try {
 			connect.setAutoCommit(false);
-			
-			while (!end){
+
+			while (!end) {
 				System.out.print("\n\n TESTING PURPOSES \n\n");
 				System.out.print("1. Make every Tables \n");
 				System.out.print("2. Drop every Tables \n");
@@ -74,8 +70,8 @@ public class core {
 				System.out.print("6. individual test cases \n");
 				mode = Integer.parseInt(BR.readLine());
 				System.out.println();
-				
-				switch (mode){
+
+				switch (mode) {
 				case 1:
 					AllTables();
 					break;
@@ -83,11 +79,12 @@ public class core {
 					DAllTables();
 					break;
 				case 3:
-					item.insertItem(connect, 1, "testtitle", "cd", "rock", "TestRecords", "2001", "25.25", 52);
+					item.insertItem(connect, 1, "testtitle", "cd", "rock",
+							"TestRecords", "2001", "25.25", 52);
 					hassong.insertHasSong(connect, 1, "testtitleSong");
 					leadsinger.insertLeadSinger(connect, 1, "testsinger");
 					break;
-				case 4: 
+				case 4:
 					item.showItem(connect);
 					hassong.showHasSong(connect);
 					leadsinger.showLeadSinger(connect);
@@ -97,41 +94,37 @@ public class core {
 					hassong.deleteHasSong(connect, 1);
 					leadsinger.deleteLeadSinger(connect, 1);
 					break;
-				
+
 				}
 			}
 			connect.close();
 			BR.close();
 			System.out.println("\n Done testing \n\n");
 			System.exit(0);
-		}catch (IOException error)
-		{
-			System.out.println ("IOExcept \n");
-			
-		}catch (SQLException error)
-		{
-			System.out.println ("SQLException \n");
-			
+		} catch (IOException error) {
+			System.out.println("IOExcept \n");
+
+		} catch (SQLException error) {
+			System.out.println("SQLException \n");
+
 		}
 	}
-	
-	public Connection getConnect ()
-	{
+
+	public Connection getConnect() {
 		return connect;
 	}
-	
+
 	public static void main(String args[]) throws InterruptedException {
-				MenuBar Menu = new MenuBar(connect);		
-				core test = new core();
-				//ClerkGUI clerk = new ClerkGUI(connect);		
-				//Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				
+		MenuBar Menu = new MenuBar(connect);
+		core test = new core();
+		// ClerkGUI clerk = new ClerkGUI(connect);
+		// Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-	
-	private void AllTables() { /*create table function*/
 
-		try { 
+	private void AllTables() { /* create table function */
+
+		try {
 			item.createItem(connect);
 			hassong.createHasSong(connect);
 			leadsinger.createLeadSinger(connect);
@@ -139,15 +132,15 @@ public class core {
 			System.out.println("Creating Tables failed");
 		}
 	}
-	
-	private void DAllTables(){
-		try{
+
+	private void DAllTables() {
+		try {
 			item.dropItem(connect);
 			hassong.dropHasSong(connect);
 			leadsinger.dropLeadSinger(connect);
-		}catch (SQLException error) {
-			System.out.println ("drop table failed");
-			
+		} catch (SQLException error) {
+			System.out.println("drop table failed");
+
 		}
 	}
 }
