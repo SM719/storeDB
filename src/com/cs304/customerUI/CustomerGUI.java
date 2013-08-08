@@ -1,4 +1,5 @@
 package com.cs304.customerUI;
+
 //import java.awt.FlowLayout;
 //import javax.swing.JFrame;
 //import javax.swing.JLabel;
@@ -15,29 +16,25 @@ import java.sql.Connection;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-
 
 public class CustomerGUI {
 
-	//UNCOMMENT LATER
+	// UNCOMMENT LATER
 	Connection connection;
-	
+
 	private JFrame Frame;
-	
+
 	private JLabel item1;
-	
+
 	private JButton register;
 	private JButton purchaseOnline;
-	
-	// constructor 
+
+	// constructor
 	public CustomerGUI(Connection con) {
-		
-		
+
 		connection = con;
-		
+
 		Frame = new JFrame("Customer Operations");
 		Frame.setVisible(true);
 		Frame.setSize(400, 300);
@@ -47,13 +44,12 @@ public class CustomerGUI {
 
 		GridBagLayout gb = new GridBagLayout();
 		GridBagConstraints g = new GridBagConstraints();
-		
+
 		JPanel panel = new JPanel();
-		
+
 		register = new JButton("Register");
 		purchaseOnline = new JButton("Purchase items online");
-		
-		
+
 		g.gridx = 0;
 		g.gridy = 1;
 		g.gridwidth = 5;
@@ -67,31 +63,29 @@ public class CustomerGUI {
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(purchaseOnline, g);
 		panel.add(purchaseOnline);
-		
+
 		panel.setLayout(gb);
-		
+
 		theHandler Handler = new theHandler();
 		register.addActionListener(Handler);
 		purchaseOnline.addActionListener(Handler);
-		
+
 		Frame.add(panel);
 	}
-	
+
 	// takes one method, whenever an event occurs
-	private class theHandler implements ActionListener{
+	private class theHandler implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			
-			if(event.getSource() == register){
-				Registration register = new Registration();
-			}
-			else if(event.getSource() == purchaseOnline ){
-				Purchase purchase = new Purchase();
+
+			if (event.getSource() == register) {
+				new Registration();
+			} else if (event.getSource() == purchaseOnline) {
+				new Purchase();
 			}
 		}
-		
-		
+
 	}
-	
+
 }
