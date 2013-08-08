@@ -73,25 +73,25 @@ public class AddItems {
 		panel.add(price);
 
 		g.gridx = 0;
-		g.gridy = 4;
+		g.gridy = 6;
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(add, g);
 		panel.add(add);
 
 		g.gridx = 0;
-		g.gridy = 5;
+		g.gridy = 7;
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(cancel, g);
 		panel.add(cancel);
 
 		g.gridx = 0;
-		g.gridy = 6;
+		g.gridy = 4;
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(songs, g);
 		panel.add(songs);
 
 		g.gridx = 0;
-		g.gridy = 7;
+		g.gridy = 5;
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(singers, g);
 		panel.add(singers);
