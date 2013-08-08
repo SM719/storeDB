@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 
 public class ManagerGUI {
 
-	// UNCOMMENT LATER
 	Connection connection;
 
 	private JFrame Frame;
@@ -98,11 +97,12 @@ public class ManagerGUI {
 				String string = new String();
 				JOptionPane.showMessageDialog(null, string);
 			} else if (event.getSource() == processDelivery) {
-				new ProcessDeliveryUI();
+				new ProcessDeliveryUI(connection);
 			} else if (event.getSource() == salesReport) {
-				new SalesReportUI();
+				new SalesReportUI(connection);
+			} else if (event.getSource() == topSellers) {
+				new TopSellers(connection);
 			}
-
 		}
 
 	}

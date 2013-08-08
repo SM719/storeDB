@@ -11,28 +11,23 @@ import java.sql.Connection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+public class ClerkGUI {
 
-
-public class ClerkGUI  {
-
-	//UNCOMMENT LATER
+	// UNCOMMENT LATER
 	Connection connection;
-	
+
 	private JFrame Frame;
-	
-	
+
 	private JButton processPurchase;
 	private JButton processReturn;
-	
-	// constructor 
+
+	// constructor
 	public ClerkGUI(Connection con) {
-		
+
 		connection = con;
-		
+
 		Frame = new JFrame("Clerk Operations");
 		Frame.setVisible(true);
 		Frame.setSize(400, 300);
@@ -42,19 +37,16 @@ public class ClerkGUI  {
 
 		GridBagLayout gb = new GridBagLayout();
 		GridBagConstraints g = new GridBagConstraints();
-		
+
 		JPanel panel = new JPanel();
-		
+
 		processPurchase = new JButton("Process a purchase of items");
 		processReturn = new JButton("Process a return of items");
-		
+
 		/*
-		g.gridx = 0;
-		g.gridy = 0;
-		g.insets = new Insets(10, 29, 10, 10);
-		gb.setConstraints(text, g);
-		panel.add(text);
-		*/
+		 * g.gridx = 0; g.gridy = 0; g.insets = new Insets(10, 29, 10, 10);
+		 * gb.setConstraints(text, g); panel.add(text);
+		 */
 
 		g.gridx = 0;
 		g.gridy = 1;
@@ -69,29 +61,27 @@ public class ClerkGUI  {
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(processReturn, g);
 		panel.add(processReturn);
-		
+
 		panel.setLayout(gb);
-		
+
 		theHandler Handler = new theHandler();
 		processPurchase.addActionListener(Handler);
 		processPurchase.addActionListener(Handler);
-		
+
 		Frame.add(panel);
 	}
-	
+
 	// takes one method, whenever an event occurs
-	private class theHandler implements ActionListener{
+	private class theHandler implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			
-			//String string = new String();
-			
-			
-			//JOptionPane.showMessageDialog(null, string);
+
+			// String string = new String();
+
+			// JOptionPane.showMessageDialog(null, string);
 		}
-		
-		
+
 	}
-	
+
 }

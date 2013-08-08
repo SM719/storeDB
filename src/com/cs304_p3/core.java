@@ -117,8 +117,8 @@ public class core {
 	}
 
 	public static void main(String args[]) throws InterruptedException {
-		MenuBar Menu = new MenuBar(connect);
-		core test = new core();
+		new MenuBar(connect);
+		new core();
 		// ClerkGUI clerk = new ClerkGUI(connect);
 		// Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
