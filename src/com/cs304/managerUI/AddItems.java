@@ -138,7 +138,8 @@ public class AddItems {
 					try {
 						con.setAutoCommit(false);
 						Statement state = con.createStatement();
-						ResultSet r = state.executeQuery("SELECT * FROM Item");
+						ResultSet r = state
+								.executeQuery("SELECT UPC, stock FROM Item");
 						System.out.println("test2");
 						while (r.next()) {
 							int upc = r.getInt("UPC");
@@ -152,15 +153,11 @@ public class AddItems {
 								if (Integer.parseInt(quantity.getText()) > 0) {
 									stock += Integer.parseInt(quantity
 											.getText());
-									new Item().updateStock(con, stock);
+									new Item().updateStock(con, stock, upc);
 								}
 							}
 						}
-						// System.out.println(upc);
 
-						System.out.println("test3");
-						new Item().insertItem(con, 54, "testtitle", "cd",
-								"rock", "TestRecords", "2001", "25.25", 52);
 						con.commit();
 						state.close();
 					} catch (SQLException error) {

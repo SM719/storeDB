@@ -138,12 +138,13 @@ public class Item {
 
 	}
 
-	public void updateStock(Connection connect, int stock) {
+	public void updateStock(Connection connect, int stock, int upc) {
 		PreparedStatement p;
 		try {
 			p = connect
 					.prepareStatement("UPDATE item SET stock = ? WHERE UPC = ?");
-			p.setInt(8, stock);
+			p.setInt(1, stock);
+			p.setInt(2, upc);
 			p.executeUpdate();
 			connect.commit();
 			p.close();
