@@ -32,9 +32,9 @@ public class Registration {
 	// UNCOMMENT LATER
 	Connection connection;
 
-	private JFrame Frame;
+	private JFrame Frame, fr;
 
-	private JLabel item1;
+	private JLabel nameLabel;
 	private JTextField name;
 	private JTextField address;
 	private JTextField phone;
@@ -45,10 +45,10 @@ public class Registration {
 	private JButton cancel;
 
 	// constructor
-	public Registration() {
+	public Registration(Connection con, JFrame f) {
 
-		// f =frame;
-		// connection = con;
+		fr = f;
+		connection = con;
 
 		Frame = new JFrame("Customer Registration");
 		Frame.setVisible(true);
@@ -62,6 +62,7 @@ public class Registration {
 
 		JPanel panel = new JPanel();
 
+		nameLabel = new JLabel("Enter your name");
 		name = new JTextField("Enter your name");
 		address = new JTextField("Enter your address");
 		phone = new JTextField("Enter your phone number");
@@ -70,7 +71,17 @@ public class Registration {
 		register = new JButton("Register");
 		cancel = new JButton("Cancel");
 
+		// ///////////
 		g.gridx = 0;
+		g.gridy = 1;
+		g.gridwidth = 5;
+		g.fill = GridBagConstraints.HORIZONTAL;
+		g.insets = new Insets(10, 5, 10, 10);
+		gb.setConstraints(nameLabel, g);
+		panel.add(nameLabel);
+		// //////////
+
+		g.gridx = 1;
 		g.gridy = 1;
 		g.gridwidth = 5;
 		g.fill = GridBagConstraints.HORIZONTAL;
@@ -136,10 +147,9 @@ public class Registration {
 
 			if (event.getSource() == cancel) {
 				Frame.dispose();
+			} else if (event.getSource() == register) {
+
 			}
-
 		}
-
 	}
-
 }

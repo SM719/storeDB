@@ -27,7 +27,7 @@ public class TopSellers {
 
 	Connection connection;
 
-	private JFrame Frame;
+	private JFrame Frame, fr;
 
 	private JTextField date;
 	private JTextField num;
@@ -36,9 +36,9 @@ public class TopSellers {
 	private JButton cancel;
 
 	// constructor
-	public TopSellers(Connection con) {
+	public TopSellers(Connection con, JFrame f) {
 
-		// f =frame;
+		fr = f;
 		connection = con;
 
 		Frame = new JFrame("Top Selling Items");

@@ -65,7 +65,7 @@ public class core {
 				System.out.print("\n\n TESTING PURPOSES \n\n");
 				System.out.print("1. Make every Table \n");
 				System.out.print("2. Drop every Table \n");
-				System.out.print("3. individual test cases \n");
+				System.out.print("3. Insert all items \n");
 				System.out.print("4. Show every Table \n");
 				System.out.print("5. Delete every Table \n");
 				System.out.print("6. Quit \n");
@@ -80,11 +80,15 @@ public class core {
 					DAllTables();
 					break;
 				case 3:
-					item.insertItem(connect, 1, "testtitle", "cd", "rock",
-							"TestRecords", "2001", "25.25", 52);
-					hassong.insertHasSong(connect, 1, "testtitleSong");
-					leadsinger.insertLeadSinger(connect, 1, "testsinger");
+					/*
+					 * item.insertItem(connect, 1, "testtitle", "cd", "rock",
+					 * "TestRecords", "2001", "25.25", 52);
+					 * hassong.insertHasSong(connect, 1, "testtitleSong");
+					 * leadsinger.insertLeadSinger(connect, 1, "testsinger");
+					 */
 					// showPurchase.insertPurcahse(connect, )
+					insertAllItems();
+					insertSongsSingers();
 
 					break;
 				case 4:
@@ -150,5 +154,83 @@ public class core {
 			System.out.println("drop table failed");
 
 		}
+	}
+
+	private void insertAllItems() {
+		try {
+			item.insertItem(connect, 1, "RockCity", "cd", "rock",
+					"TestRecords", "2001", "25.25", 52);
+
+			item.insertItem(connect, 2, "Armageddon", "dvd", "country",
+					"TestRecords2", "1992", "30.00", 10);
+
+			item.insertItem(connect, 3, "Signs", "dvd", "classic",
+					"NewRocords", "1992", "33.00", 11);
+
+			item.insertItem(connect, 4, "Encore", "cd", "rap", "DreRecords",
+					"1995", "13.00", 12);
+
+			item.insertItem(connect, 5, "Mr Deeds", "dvd", "instrumental",
+					"Fox", "1997", "25.00", 13);
+
+			item.insertItem(connect, 6, "Independance day", "dvd", "rock",
+					"WB", "1992", "30.00", 14);
+
+			item.insertItem(connect, 7, "Random", "cd", "pop", "Paramount",
+					"2000", "18.00", 15);
+
+			item.insertItem(connect, 8, "King Kong", "dvd", "rap", "Universal",
+					"1999", "25.00", 16);
+
+			item.insertItem(connect, 9, "Best of", "cd", "instrumental",
+					"DrDre", "2007", "18.00", 118);
+
+			item.insertItem(connect, 10, "Exorcist", "cd", "classical", "MGM",
+					"1999", "25.00", 30);
+
+		} catch (Exception e) {
+			System.out.println("Inserting items failed\n");
+		}
+	}
+
+	private void insertSongsSingers() {
+		try {
+			hassong.insertHasSong(connect, 1, "RockCity");
+			hassong.insertHasSong(connect, 1, "DetroitDock");
+			hassong.insertHasSong(connect, 1, "RockYourself");
+			leadsinger.insertLeadSinger(connect, 1, "Kiss");
+
+			hassong.insertHasSong(connect, 2, "RockOn");
+			leadsinger.insertLeadSinger(connect, 2, "RollingStones");
+
+			hassong.insertHasSong(connect, 3, "HoundDog");
+			leadsinger.insertLeadSinger(connect, 3, "Elvis");
+
+			hassong.insertHasSong(connect, 4, "LoseYourself");
+			leadsinger.insertLeadSinger(connect, 4, "Eminem");
+
+			hassong.insertHasSong(connect, 5, "Popular");
+			leadsinger.insertLeadSinger(connect, 5, "LilWayne");
+
+			hassong.insertHasSong(connect, 6, "HolyGrail");
+			hassong.insertHasSong(connect, 6, "TomFord");
+			leadsinger.insertLeadSinger(connect, 6, "JayZ");
+			leadsinger.insertLeadSinger(connect, 6, "J.T");
+
+			hassong.insertHasSong(connect, 7, "E.T");
+			leadsinger.insertLeadSinger(connect, 7, "KatyPerry");
+			leadsinger.insertLeadSinger(connect, 7, "KanyeWest");
+
+			hassong.insertHasSong(connect, 8, "InDaClub");
+			leadsinger.insertLeadSinger(connect, 1, "50Cent");
+
+			hassong.insertHasSong(connect, 9, "WakeMeUp");
+			leadsinger.insertLeadSinger(connect, 9, "Avicii");
+
+			hassong.insertHasSong(connect, 10, "MetalSong");
+			leadsinger.insertLeadSinger(connect, 10, "JustinBieber");
+		} catch (Exception E) {
+		}
+
 	}
 }

@@ -57,6 +57,7 @@ public class MenuBar implements ActionListener {
 		label2.setFont(new Font("Serif", Font.PLAIN, 36));
 		constraints.gridy = 1;
 		F.add(label2, constraints);
+
 		F.setVisible(true);
 	}
 
@@ -65,7 +66,7 @@ public class MenuBar implements ActionListener {
 		// TODO Auto-generated method stub
 		if (event.getSource() == item1) {
 
-			new CustomerGUI(connection);
+			new CustomerGUI(connection, F);
 
 			// closes on hitting X
 			// customerGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,7 +84,8 @@ public class MenuBar implements ActionListener {
 			// clerkGUI.setVisible(true);
 		}
 		if (event.getSource() == item3) {
-			new ManagerGUI(connection);
+
+			new ManagerGUI(connection, F);
 
 			// managerGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			// managerGUI.setSize(600, 600);
@@ -91,5 +93,4 @@ public class MenuBar implements ActionListener {
 		}
 
 	}
-
 }

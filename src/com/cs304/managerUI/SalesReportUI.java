@@ -18,17 +18,17 @@ public class SalesReportUI {
 
 	Connection connection;
 
-	private JFrame Frame;
+	private JFrame Frame, fr;
 
 	private JTextField date;
 
 	private JButton display;
 	private JButton cancel;
 
-	public SalesReportUI(Connection connection) {
+	public SalesReportUI(Connection connection, JFrame f) {
 		// TODO Auto-generated constructor stub
 
-		// f =frame;
+		fr = f;
 		this.connection = connection;
 
 		Frame = new JFrame("Sales Report");

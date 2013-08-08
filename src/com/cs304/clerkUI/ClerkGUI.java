@@ -94,9 +94,6 @@ public class ClerkGUI  {
 				returnUI returnp = new returnUI (connection,mainframe);
 			}
 			
-			
-			
-			//JOptionPane.showMessageDialog(null, string);
 		}
 		
 		

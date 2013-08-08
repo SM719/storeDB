@@ -33,7 +33,7 @@ public class Purchase {
 	// UNCOMMENT LATER
 	Connection connection;
 
-	private JFrame Frame;
+	private JFrame Frame, fr;
 
 	private JLabel item1;
 	private JTextField ID;
@@ -46,10 +46,10 @@ public class Purchase {
 	private JButton cancel;
 
 	// constructor
-	public Purchase() {
+	public Purchase(Connection con, JFrame f) {
 
-		// f =frame;
-		// connection = con;
+		fr = f;
+		connection = con;
 
 		Frame = new JFrame("Customer Purchase");
 		Frame.setVisible(true);
