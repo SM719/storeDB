@@ -130,7 +130,8 @@ public class AddItems {
 				} else if (!(quantity.getText().matches("[0-9]+"))) {
 					JOptionPane.showMessageDialog(null,
 							"ERROR: Quantity can only contain numbers");
-				} else if (!(price.getText().matches("[0-9]+"))) {
+				} else if ((!(price.getText().matches("[0-9,.]+")) && (!(price
+						.getText().contains("Enter item price if different:"))))) {
 					JOptionPane.showMessageDialog(null,
 							"ERROR: Price can only contain numbers");
 				} else {
@@ -140,20 +141,19 @@ public class AddItems {
 						Statement state = con.createStatement();
 						ResultSet r = state
 								.executeQuery("SELECT UPC, stock FROM Item");
-						System.out.println("test2");
 						while (r.next()) {
 							int upc = r.getInt("UPC");
-							// String price = r.getString("price");
-							// int stock =
-							// Integer.parseInt(r.getString("stock"));
-							System.out.println("test3");
 							int stock = r.getInt("stock");
-							System.out.println("test4");
 							if (upc == Integer.parseInt(UPC.getText())) {
 								if (Integer.parseInt(quantity.getText()) > 0) {
 									stock += Integer.parseInt(quantity
 											.getText());
 									new Item().updateStock(con, stock, upc);
+								}
+								if (!(price.getText()
+										.equals("Enter item price if different:"))) {
+									new Item().updatePrice(con,
+											price.getText(), upc);
 								}
 							}
 						}

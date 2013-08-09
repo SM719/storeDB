@@ -156,12 +156,13 @@ public class Item {
 		}
 	}
 
-	public void updatePrice(Connection connect, String price) {
+	public void updatePrice(Connection connect, String price, int upc) {
 		PreparedStatement p;
 		try {
 			p = connect
 					.prepareStatement("UPDATE item SET price = ? WHERE UPC = ?");
-			p.setString(7, price);
+			p.setString(1, price);
+			p.setInt(2, upc);
 			p.executeUpdate();
 			connect.commit();
 			p.close();
