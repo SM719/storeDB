@@ -135,6 +135,7 @@ public class AddItems {
 							"ERROR: Price can only contain numbers");
 				} else {
 					System.out.println(UPC.getText());
+					boolean found = false;
 					try {
 						con.setAutoCommit(false);
 						Statement state = con.createStatement();
@@ -150,12 +151,18 @@ public class AddItems {
 							int stock = r.getInt("stock");
 							System.out.println("test4");
 							if (upc == Integer.parseInt(UPC.getText())) {
+								found = true;
 								if (Integer.parseInt(quantity.getText()) > 0) {
 									stock += Integer.parseInt(quantity
 											.getText());
 									new Item().updateStock(con, stock, upc);
 								}
 							}
+						}
+						if (!found) {
+							new AddNewItem(connection, fr, UPC.getText(),
+									quantity.getText(), price.getText());
+							found = false;
 						}
 
 						con.commit();
