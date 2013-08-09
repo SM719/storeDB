@@ -20,7 +20,8 @@ public class AddNewItem {
 
 	private JFrame Frame, fr;
 
-	private JTextField UPC, price, title, type, category, company, year, stock;
+	private JTextField price, title, type, category, company, year, songs,
+			singers;
 
 	private JButton add;
 	private JButton cancel;
@@ -32,9 +33,9 @@ public class AddNewItem {
 		fr = f;
 		this.connection = connection;
 
-		Frame = new JFrame("Add Item");
+		Frame = new JFrame("Add New Item");
 		Frame.setVisible(true);
-		Frame.setSize(400, 300);
+		Frame.setSize(700, 600);
 		Dimension d = Frame.getToolkit().getScreenSize();
 		Rectangle r = Frame.getBounds();
 		Frame.setLocation((d.width - r.width) / 2, (d.height - r.height) / 2);
@@ -44,15 +45,7 @@ public class AddNewItem {
 
 		JPanel panel = new JPanel();
 
-		UPC = new JTextField();
-		UPC.setText(upc);
-
-		price = new JTextField();
-		price.setText(pr);
-
-		stock = new JTextField("Enter item price if different:");
-		stock.setText(quantity);
-
+		price = new JTextField("Enter price:");
 		title = new JTextField("Enter title:");
 		type = new JTextField("Enter item type:");
 		category = new JTextField("Enter the category:");
@@ -60,14 +53,16 @@ public class AddNewItem {
 		year = new JTextField("Enter the year:");
 		add = new JButton("Add Item");
 		cancel = new JButton("Cancel");
+		songs = new JTextField("Enter songs (seperate each song by comma)");
+		singers = new JTextField("Enter singers (seperate each song by comma)");
 
 		g.gridx = 0;
 		g.gridy = 1;
-		g.gridwidth = 7;
+		g.gridwidth = 10;
 		g.fill = GridBagConstraints.HORIZONTAL;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(UPC, g);
-		panel.add(UPC);
+		gb.setConstraints(songs, g);
+		panel.add(songs);
 
 		g.gridx = 0;
 		g.gridy = 2;
@@ -78,8 +73,8 @@ public class AddNewItem {
 		g.gridx = 0;
 		g.gridy = 3;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(stock, g);
-		panel.add(stock);
+		gb.setConstraints(singers, g);
+		panel.add(singers);
 
 		g.gridx = 0;
 		g.gridy = 4;
@@ -126,8 +121,8 @@ public class AddNewItem {
 		panel.setLayout(gb);
 
 		theHandler Handler = new theHandler(this.connection);
-		UPC.addActionListener(Handler);
-		stock.addActionListener(Handler);
+		songs.addActionListener(Handler);
+		singers.addActionListener(Handler);
 		price.addActionListener(Handler);
 		title.addActionListener(Handler);
 		type.addActionListener(Handler);

@@ -37,7 +37,7 @@ public class AddItems {
 		fr = f;
 		this.connection = connection;
 
-		Frame = new JFrame("Add Item");
+		Frame = new JFrame("Item Update/Add");
 		Frame.setVisible(true);
 		Frame.setSize(400, 300);
 		Dimension d = Frame.getToolkit().getScreenSize();
