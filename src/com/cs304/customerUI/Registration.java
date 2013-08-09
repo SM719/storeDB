@@ -23,8 +23,8 @@ import javax.swing.JTextField;
  * Customer Registration. 
  * Customers who access the store online for the first time, 
  * will be asked to register by providing their personal information,
- *  including their name, their address, phone number,an id and a password.
- *  If the id is already in the system, they will be asked to provide another one. 
+ * including their name, their address, phone number,an id and a password.
+ * If the id is already in the system, they will be asked to provide another one. 
  */
 
 public class Registration {
@@ -150,6 +150,7 @@ public class Registration {
 			} else if (event.getSource() == register) {
 
 			}
+
 		}
 	}
 }

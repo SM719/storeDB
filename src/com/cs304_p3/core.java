@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import com.cs304.UIs.Login;
+import com.cs304.tables.Customer;
 import com.cs304.tables.HasSong;
 import com.cs304.tables.Item;
 import com.cs304.tables.LeadSinger;
@@ -25,6 +26,8 @@ public class core {
 	private static LeadSinger leadsinger;
 	private static Purchase purcahse;
 	Login Login;
+
+	private static Customer customer;
 
 	public core() throws InterruptedException {
 
@@ -44,6 +47,11 @@ public class core {
 				hassong = new HasSong();
 				leadsinger = new LeadSinger();
 				purcahse = new Purchase();
+
+				//
+				customer = new Customer();
+
+				//
 
 				// Initialize point
 				MenuScreen();
@@ -139,6 +147,9 @@ public class core {
 			hassong.createHasSong(connect);
 			leadsinger.createLeadSinger(connect);
 			purcahse.createPurchase(connect);
+
+			//
+			customer.createCustomer(connect);
 		} catch (SQLException e) {
 			System.out.println("Creating Tables failed");
 		}
@@ -150,6 +161,10 @@ public class core {
 			hassong.dropHasSong(connect);
 			leadsinger.dropLeadSinger(connect);
 			purcahse.dropPurchase(connect);
+
+			//
+			customer.dropCustomer(connect);
+
 		} catch (SQLException error) {
 			System.out.println("drop table failed");
 
@@ -164,7 +179,7 @@ public class core {
 			item.insertItem(connect, 2, "Armageddon", "dvd", "country",
 					"TestRecords2", "1992", "30.00", 10);
 
-			item.insertItem(connect, 3, "Signs", "dvd", "classic",
+			item.insertItem(connect, 3, "Signs", "dvd", "classical",
 					"NewRocords", "1992", "33.00", 11);
 
 			item.insertItem(connect, 4, "Encore", "cd", "rap", "DreRecords",
@@ -214,6 +229,7 @@ public class core {
 
 			hassong.insertHasSong(connect, 6, "HolyGrail");
 			hassong.insertHasSong(connect, 6, "TomFord");
+
 			leadsinger.insertLeadSinger(connect, 6, "JayZ");
 			leadsinger.insertLeadSinger(connect, 6, "J.T");
 
