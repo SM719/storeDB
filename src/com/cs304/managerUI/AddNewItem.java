@@ -11,8 +11,13 @@ import java.sql.Connection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.cs304.tables.HasSong;
+import com.cs304.tables.Item;
+import com.cs304.tables.LeadSinger;
 
 public class AddNewItem {
 
@@ -22,7 +27,8 @@ public class AddNewItem {
 
 	private JTextField price, title, type, category, company, year, songs,
 			singers;
-
+	private String priceS, titleS, typeS, categoryS, companyS, yearS, songsS,
+			singersS, upcS, quantityS;
 	private JButton add;
 	private JButton cancel;
 
@@ -30,6 +36,8 @@ public class AddNewItem {
 			String quantity, String pr) {
 		// TODO Auto-generated constructor stub
 
+		upcS = upc;
+		quantityS = quantity;
 		fr = f;
 		this.connection = connection;
 
@@ -53,9 +61,10 @@ public class AddNewItem {
 		year = new JTextField("Enter item year:");
 		add = new JButton("Add Item");
 		cancel = new JButton("Cancel");
-		songs = new JTextField("Enter item songs (seperate each song by comma)");
+		songs = new JTextField(
+				"Enter item songs (seperate each by comma then space)");
 		singers = new JTextField(
-				"Enter item singers (seperate each song by comma)");
+				"Enter item singers (seperate each by comma then space)");
 
 		g.gridx = 0;
 		g.gridy = 8;
@@ -149,6 +158,65 @@ public class AddNewItem {
 			if (event.getSource() == cancel) {
 				Frame.dispose();
 			} else if (event.getSource() == add) {
+
+				priceS = "";
+				titleS = "";
+				typeS = "";
+				categoryS = "";
+				companyS = "";
+				yearS = "";
+
+				if (!(price.getText().equals("Enter item price:"))) {
+					priceS = price.getText();
+				}
+				if (!(title.getText().equals("Enter item title:"))) {
+					titleS = title.getText();
+				}
+				if (!(type.getText().equals("Enter item type cd or dvd:"))) {
+					typeS = type.getText();
+				}
+				if (!(category.getText().equals("Enter item category:"))) {
+					categoryS = category.getText();
+				}
+				if (!(company.getText().equals("Enter item company:"))) {
+					companyS = company.getText();
+				}
+				if (!(year.getText().equals("Enter item year:"))) {
+					yearS = year.getText();
+				}
+
+				// Below if statements ensure we have at least one singer/song
+				// per item
+				if ((songs.getText()
+						.equals("Enter item songs (seperate each song by comma then space)"))
+						|| (songs.getText().equals(""))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Please Enter at least one song");
+				} else if ((singers.getText().equals(""))
+						|| (singers.getText()
+								.equals("Enter item singers (seperate each by comma then space)"))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Please Enter at least one singer");
+				} else {
+					String[] listSongs = songs.getText().split(", ");
+					String[] listSingers = singers.getText().split(", ");
+
+					new Item().insertItem(connection, Integer.parseInt(upcS),
+							titleS, typeS, categoryS, companyS, yearS, priceS,
+							Integer.parseInt(quantityS));
+					for (int i = 0; i < listSongs.length; i++) {
+
+						System.out.println(listSongs[i]);
+						new HasSong().insertHasSong(connection,
+								Integer.parseInt(upcS), listSongs[i]);
+					}
+					for (int i = 0; i < listSingers.length; i++) {
+
+						new LeadSinger().insertLeadSinger(connection,
+								Integer.parseInt(upcS), listSongs[i]);
+					}
+
+				}
 
 			}
 		}
