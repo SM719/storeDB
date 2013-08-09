@@ -84,6 +84,8 @@ public class SalesReportUI {
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == cancel) {
 				Frame.dispose();
+			} else if (event.getSource() == display) {
+				new SalesReportTable(connection, fr);
 			}
 		}
 

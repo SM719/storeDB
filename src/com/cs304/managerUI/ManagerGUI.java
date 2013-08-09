@@ -101,16 +101,18 @@ public class ManagerGUI {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == addItem) {
-				// Just an empty message till we decide on implementation
+
 				new AddItems(connection, fr);
 			} else if (event.getSource() == processDelivery) {
+
 				new ProcessDeliveryUI(connection, fr);
 			} else if (event.getSource() == salesReport) {
+
 				new SalesReportUI(connection, fr);
+
 			} else if (event.getSource() == topSellers) {
-				// new TopSellers(connection, fr);
-				TableGUI table = new TableGUI();
-				table.setVisible(true);
+
+				new TopSellers(connection, fr);
 
 			} else if (event.getSource() == close) {
 				Frame.dispose();
