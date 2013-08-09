@@ -99,16 +99,19 @@ public class TopSellers {
 	// takes one method, whenever an event occurs
 	private class theHandler implements ActionListener {
 
+		String d;
+		int num;
+
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == cancel) {
 				Frame.dispose();
 			} else if (event.getSource() == display) {
-				new BestSellersTable(connection, fr);
+				new BestSellersTable(connection, fr, d, num);
+
 			}
 
 		}
 
 	}
-
 }

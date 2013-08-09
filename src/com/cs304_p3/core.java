@@ -104,6 +104,7 @@ public class core {
 					hassong.showHasSong(connect);
 					leadsinger.showLeadSinger(connect);
 					// purcahse.showPurchase(connect);
+					customer.showCustomer(connect);
 					break;
 				case 5:
 					item.deleteItem(connect, 1);

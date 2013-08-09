@@ -20,7 +20,7 @@ class BestSellersTable {
 	Connection connect;
 
 	// Constructor of main frame
-	public BestSellersTable(Connection con, JFrame f) {
+	public BestSellersTable(Connection con, JFrame f, String date, int n) {
 		// Set the frame characteristics
 		connect = con;
 		fr = f;

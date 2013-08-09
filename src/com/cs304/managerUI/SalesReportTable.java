@@ -20,7 +20,7 @@ class SalesReportTable {
 	Connection connect;
 
 	// Constructor of main frame
-	public SalesReportTable(Connection con, JFrame f) {
+	public SalesReportTable(Connection con, JFrame f, String d) {
 		// Set the frame characteristics
 		connect = con;
 		fr = f;

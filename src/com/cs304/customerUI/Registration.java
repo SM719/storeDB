@@ -12,12 +12,18 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.cs304.tables.Customer;
 
 /*
  * Customer Registration. 
@@ -135,12 +141,86 @@ public class Registration {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 
+			boolean reg = true;
+
 			if (event.getSource() == cancel) {
 				Frame.dispose();
 			} else if (event.getSource() == register) {
 
-			}
+				if ((name.getText().equals("Enter your name"))
+						|| (name.getText().equals(""))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Please enter your name");
 
+				} else if ((address.getText().equals("Enter your address"))
+						|| (address.getText().equals(""))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Please enter your address");
+
+				} else if ((phone.getText().equals("Enter your phone number"))
+						|| (phone.getText().equals(""))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Please enter your phone number");
+				} else if (!(phone.getText().matches("[0-9]+"))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Phone number can only contain numbers");
+
+				} else if ((ID.getText().equals("Enter your ID"))
+						|| (ID.getText().equals(""))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Please enter your ID");
+
+				} else if (!(ID.getText().matches("[0-9]+"))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: ID can only contain numbers");
+
+				} else if ((password.getText().equals("Enter your password"))
+						|| (password.getText().equals(""))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Please enter your password");
+				} else {
+
+					// Integer CID = Integer.valueOf(ID.getText().toString());
+
+					try {
+						// connection.setAutoCommit(false);
+						Statement state = connection.createStatement();
+						Integer CID = Integer.valueOf(ID.getText().toString());
+						ResultSet r = state
+								.executeQuery("SELECT CID FROM Customer");
+						while (r.next()) {
+							int upc = r.getInt("CID");
+							if (CID == upc) {
+								JOptionPane
+										.showMessageDialog(null,
+												"ERROR: This User ID already exist, please enter another");
+								ID.setText("");
+								reg = false;
+							} else {
+								reg = true;
+							}
+						}
+						connection.commit();
+						state.close();
+					} catch (SQLException error) {
+						System.out.println(error.getMessage());
+					}
+					if (reg) {
+						String n, addr, ph, pass;
+						Integer CID = Integer.valueOf(ID.getText().toString());
+						n = name.getText().toString();
+						addr = address.getText().toString();
+						ph = phone.getText().toString();
+						pass = password.getText().toString();
+
+						new Customer().insertCustomer(connection, CID, pass, n,
+								addr, ph);
+						Frame.dispose();
+					}
+
+				}
+
+			}
 		}
 	}
 }

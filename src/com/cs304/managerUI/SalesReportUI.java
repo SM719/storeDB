@@ -80,12 +80,15 @@ public class SalesReportUI {
 	// takes one method, whenever an event occurs
 	private class theHandler implements ActionListener {
 
+		String d;
+
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == cancel) {
 				Frame.dispose();
 			} else if (event.getSource() == display) {
-				new SalesReportTable(connection, fr);
+				String date;
+				new SalesReportTable(connection, fr, d);
 			}
 		}
 
