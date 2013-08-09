@@ -29,6 +29,7 @@ public class CustomerGUI {
 
 	private JButton register;
 	private JButton purchaseOnline;
+	private JButton close;
 
 	// constructor
 	public CustomerGUI(Connection con, JFrame f) {
@@ -48,6 +49,7 @@ public class CustomerGUI {
 
 		JPanel panel = new JPanel();
 
+		close = new JButton("Exit");
 		register = new JButton("Register");
 		purchaseOnline = new JButton("Purchase items online");
 
@@ -65,11 +67,18 @@ public class CustomerGUI {
 		gb.setConstraints(purchaseOnline, g);
 		panel.add(purchaseOnline);
 
+		g.gridx = 0;
+		g.gridy = 3;
+		g.insets = new Insets(10, 10, 10, 10);
+		gb.setConstraints(close, g);
+		panel.add(close);
+
 		panel.setLayout(gb);
 
 		theHandler Handler = new theHandler();
 		register.addActionListener(Handler);
 		purchaseOnline.addActionListener(Handler);
+		close.addActionListener(Handler);
 
 		Frame.add(panel);
 	}
@@ -84,6 +93,8 @@ public class CustomerGUI {
 				new Registration(connection, fr);
 			} else if (event.getSource() == purchaseOnline) {
 				new Purchase(connection, fr);
+			} else if (event.getSource() == close) {
+				Frame.dispose();
 			}
 		}
 

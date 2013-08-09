@@ -23,6 +23,7 @@ public class ManagerGUI {
 	private JButton processDelivery;
 	private JButton salesReport;
 	private JButton topSellers;
+	private JButton close;
 
 	// constructor
 	public ManagerGUI(Connection con, JFrame f) {
@@ -48,6 +49,7 @@ public class ManagerGUI {
 		processDelivery = new JButton("Process the delivery of an order");
 		salesReport = new JButton("Show daily sales report");
 		topSellers = new JButton("Best selling items");
+		close = new JButton("Exit");
 
 		g.gridx = 0;
 		g.gridy = 1;
@@ -75,6 +77,12 @@ public class ManagerGUI {
 		gb.setConstraints(topSellers, g);
 		panel.add(topSellers);
 
+		g.gridx = 0;
+		g.gridy = 5;
+		g.insets = new Insets(10, 10, 10, 10);
+		gb.setConstraints(close, g);
+		panel.add(close);
+
 		panel.setLayout(gb);
 
 		theHandler Handler = new theHandler();
@@ -82,6 +90,7 @@ public class ManagerGUI {
 		processDelivery.addActionListener(Handler);
 		salesReport.addActionListener(Handler);
 		topSellers.addActionListener(Handler);
+		close.addActionListener(Handler);
 
 		Frame.add(panel);
 	}
@@ -92,18 +101,24 @@ public class ManagerGUI {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == addItem) {
-				// Just an empty message till we decide on implementation
+
 				new AddItems(connection, fr);
 			} else if (event.getSource() == processDelivery) {
+
 				new ProcessDeliveryUI(connection, fr);
 			} else if (event.getSource() == salesReport) {
+
 				new SalesReportUI(connection, fr);
+
 			} else if (event.getSource() == topSellers) {
+
 				new TopSellers(connection, fr);
+
+			} else if (event.getSource() == close) {
+				Frame.dispose();
 			}
 
 		}
 
 	}
-
 }

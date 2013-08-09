@@ -71,19 +71,9 @@ public class Registration {
 		register = new JButton("Register");
 		cancel = new JButton("Cancel");
 
-		// ///////////
-		g.gridx = 0;
-		g.gridy = 1;
-		g.gridwidth = 5;
-		g.fill = GridBagConstraints.HORIZONTAL;
-		g.insets = new Insets(10, 5, 10, 10);
-		gb.setConstraints(nameLabel, g);
-		panel.add(nameLabel);
-		// //////////
-
 		g.gridx = 1;
 		g.gridy = 1;
-		g.gridwidth = 5;
+		g.gridwidth = 7;
 		g.fill = GridBagConstraints.HORIZONTAL;
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(name, g);
