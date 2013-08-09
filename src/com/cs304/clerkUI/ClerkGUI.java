@@ -11,19 +11,24 @@ import java.sql.Connection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class ClerkGUI {
 
+
+public class ClerkGUI  {
+
+	//UNCOMMENT LATER
 	Connection connection;
-
-	private JFrame Frame, mainframe;
-
+	
+	private JFrame Frame,mainframe;
+	
+	
 	private JButton processPurchase;
 	private JButton processReturn;
-	private JButton close;
-
-	// constructor
+	
+	// constructor 
 	public ClerkGUI(Connection connect, JFrame fr) {
 		mainframe = fr;
 		connection = connect;
@@ -36,17 +41,19 @@ public class ClerkGUI {
 
 		GridBagLayout gb = new GridBagLayout();
 		GridBagConstraints g = new GridBagConstraints();
-
+		
 		JPanel panel = new JPanel();
-
+		
 		processPurchase = new JButton("Process a purchase of items");
 		processReturn = new JButton("Process a return of items");
-		close = new JButton("Exit");
-
+		
 		/*
-		 * g.gridx = 0; g.gridy = 0; g.insets = new Insets(10, 29, 10, 10);
-		 * gb.setConstraints(text, g); panel.add(text);
-		 */
+		g.gridx = 0;
+		g.gridy = 0;
+		g.insets = new Insets(10, 29, 10, 10);
+		gb.setConstraints(text, g);
+		panel.add(text);
+		*/
 
 		g.gridx = 0;
 		g.gridy = 1;
@@ -61,41 +68,38 @@ public class ClerkGUI {
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(processReturn, g);
 		panel.add(processReturn);
-
-		g.gridx = 0;
-		g.gridy = 3;
-		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(close, g);
-		panel.add(close);
-
+		
 		panel.setLayout(gb);
-
+		
 		theHandler Handler = new theHandler();
 		processPurchase.addActionListener(Handler);
 		processReturn.addActionListener(Handler);
-		close.addActionListener(Handler);
-
+		
 		Frame.add(panel);
 	}
-
+	
 	// takes one method, whenever an event occurs
-	private class theHandler implements ActionListener {
+	private class theHandler implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-
-			if (event.getSource() == processPurchase) {
+			
+			if (event.getSource() == processPurchase)
+			{
 				Frame.setVisible(false);
-
-			} else if (event.getSource() == processReturn) {
+				
+			} else if (event.getSource() == processReturn)
+			{
 				Frame.setVisible(false);
-				returnUI returnp = new returnUI(connection, mainframe);
-			} else if (event.getSource() == close) {
-				Frame.dispose();
+				returnUI returnp = new returnUI (connection,mainframe);
 			}
-
+			
+			
+			
+			//JOptionPane.showMessageDialog(null, string);
 		}
-
+		
+		
 	}
-
+	
 }
