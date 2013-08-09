@@ -146,10 +146,9 @@ public class core {
 			item.createItem(connect);
 			hassong.createHasSong(connect);
 			leadsinger.createLeadSinger(connect);
+			customer.createCustomer(connect);
 			purcahse.createPurchase(connect);
 
-			//
-			customer.createCustomer(connect);
 		} catch (SQLException e) {
 			System.out.println("Creating Tables failed");
 		}
@@ -160,10 +159,8 @@ public class core {
 			item.dropItem(connect);
 			hassong.dropHasSong(connect);
 			leadsinger.dropLeadSinger(connect);
-			purcahse.dropPurchase(connect);
-
-			//
 			customer.dropCustomer(connect);
+			purcahse.dropPurchase(connect);
 
 		} catch (SQLException error) {
 			System.out.println("drop table failed");
