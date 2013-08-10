@@ -68,7 +68,7 @@ public class ReturnItem {
 			
 			while (r.next()) { 
 				UPC = r.getString("UPC");
-				System.out.printf("%-10.10s", UPC);
+				System.out.printf("\n%-10.10s", UPC);
 				
 				retID = r.getString("retID");
 				if (r.wasNull()) {

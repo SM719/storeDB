@@ -69,7 +69,7 @@ public class HasSong {
 			while (r.next())
 			{
 				UPC = r.getString("UPC");
-				System.out.printf("%-10.10s", UPC);
+				System.out.printf("\n%-10.10s", UPC);
 				
 				title = r.getString("title");
 				System.out.printf("%-20.20s", title);

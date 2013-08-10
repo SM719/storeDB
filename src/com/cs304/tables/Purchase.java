@@ -84,7 +84,7 @@ public class Purchase {
 				System.out.println(" ");
 				while (r.next()) { 
 					Receipt = r.getString("receiptID");
-					System.out.printf("%-10.10s", Receipt);
+					System.out.printf("\n%-10.10s", Receipt);
 					
 					date = r.getDate(2);
 					if (r.wasNull()) {

@@ -78,7 +78,7 @@ public class Return {
 			
 			while (r.next()) { 
 				receiptID = r.getString("retid");
-				System.out.printf("%-10.10s", receiptID);
+				System.out.printf("\n%-10.10s", receiptID);
 				
 				date = r.getDate(2);
 				if (r.wasNull()) {

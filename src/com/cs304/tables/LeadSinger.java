@@ -66,7 +66,7 @@ public class LeadSinger {
 				{
 					
 					UPC = r.getString("UPC");
-					System.out.printf ("%-10.10s",UPC);
+					System.out.printf ("\n%-10.10s",UPC);
 					
 					name = r.getString("name");
 					System.out.printf("%-20.20s", name);

@@ -76,7 +76,7 @@ public class Customer{
 			while(r.next())
 			{
 				CID = r.getString("cid");
-				System.out.printf("%-10.10s", CID);
+				System.out.printf("\n%-10.10s", CID);
 				
 				Password = r.getString("password");
 				if (r.wasNull()) {
