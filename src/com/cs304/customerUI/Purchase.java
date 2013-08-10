@@ -136,17 +136,6 @@ public class Purchase {
 				Frame.dispose();
 			} else if (event.getSource() == search) {
 
-				System.out.println("TEST\n");
-
-				Integer stk = Integer.valueOf(quantity.getText()
-						.toString());
-
-				String cat = category.getText()
-						.toString();
-				
-				new ItemList(connection, fr, cat , stk);
-				
-				/*
 				// ERROR CHECKING
 				if ((category.getText().equals("Enter your item category"))
 						&& (title.getText().equals("Enter your item title"))
@@ -166,29 +155,17 @@ public class Purchase {
 					// rock, pop, rap, country, classical, new age and
 					// instrumental
 
-					// IF only category is entered..
-					if ((!category.getText().equals(""))
-							&& (title.getText().equals(""))
-							&& (leadSinger.getText().equals(""))
-							&& (!quantity.getText().equals(""))) {
+					Integer stk = Integer
+							.valueOf(quantity.getText().toString());
 
-						System.out.println("TEST\n");
-
-						Integer stk = Integer.valueOf(quantity.getText()
-								.toString());
-
-						new ItemList(connection, fr, category.getText()
-								.toString(), stk);
-
-					}
+					new ItemList(connection, fr, category.getText(),
+							title.getText(), leadSinger.getText(), stk);
 
 				}
-				
-				*/
 
 			}
-		}
 
+		}
 	}
 
 }

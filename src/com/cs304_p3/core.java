@@ -12,7 +12,6 @@ import com.cs304.tables.Customer;
 import com.cs304.tables.HasSong;
 import com.cs304.tables.Item;
 import com.cs304.tables.LeadSinger;
-import com.cs304.tables.Purchase;
 
 public class core {
 	// reads cmd line
@@ -24,7 +23,7 @@ public class core {
 	private static Item item;
 	private static HasSong hassong;
 	private static LeadSinger leadsinger;
-	private static Purchase purcahse;
+	// private static Purchase purchase;
 	Login Login;
 
 	private static Customer customer;
@@ -46,7 +45,7 @@ public class core {
 				item = new Item();
 				hassong = new HasSong();
 				leadsinger = new LeadSinger();
-				purcahse = new Purchase();
+				// purchase = new Purchase();
 
 				//
 				customer = new Customer();
@@ -103,7 +102,7 @@ public class core {
 					item.showItem(connect);
 					hassong.showHasSong(connect);
 					leadsinger.showLeadSinger(connect);
-					// purcahse.showPurchase(connect);
+					// purchase.showPurchase(connect);
 					customer.showCustomer(connect);
 					break;
 				case 5:
@@ -148,7 +147,7 @@ public class core {
 			hassong.createHasSong(connect);
 			leadsinger.createLeadSinger(connect);
 			customer.createCustomer(connect);
-			purcahse.createPurchase(connect);
+			// purchase.createPurchase(connect);
 
 		} catch (SQLException e) {
 			System.out.println("Creating Tables failed");
@@ -161,7 +160,7 @@ public class core {
 			hassong.dropHasSong(connect);
 			leadsinger.dropLeadSinger(connect);
 			customer.dropCustomer(connect);
-			purcahse.dropPurchase(connect);
+			// purchase.dropPurchase(connect);
 
 		} catch (SQLException error) {
 			System.out.println("drop table failed");
@@ -250,4 +249,5 @@ public class core {
 		}
 
 	}
+
 }
