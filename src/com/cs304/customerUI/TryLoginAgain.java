@@ -1,9 +1,5 @@
 package com.cs304.customerUI;
 
-//import java.awt.FlowLayout;
-//import javax.swing.JFrame;
-//import javax.swing.JLabel;
-
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,26 +14,24 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class CustomerGUI {
+public class TryLoginAgain {
 
-	// UNCOMMENT LATER
 	Connection connection;
 
 	private JFrame Frame, fr;
 
-	private JLabel item1;
+	private JLabel message;
 
+	private JButton tryAgain;
 	private JButton register;
-	private JButton purchaseOnline;
-	private JButton close;
 
 	// constructor
-	public CustomerGUI(Connection con, JFrame f) {
+	public TryLoginAgain(Connection con, JFrame f) {
 
-		connection = con;
 		fr = f;
+		connection = con;
 
-		Frame = new JFrame("Customer Operations");
+		Frame = new JFrame("Try Again?");
 		Frame.setVisible(true);
 		Frame.setSize(400, 300);
 		Dimension d = Frame.getToolkit().getScreenSize();
@@ -49,36 +43,36 @@ public class CustomerGUI {
 
 		JPanel panel = new JPanel();
 
-		close = new JButton("Exit");
+		message = new JLabel("Would you like to try again or register?");
+		tryAgain = new JButton("Try Again");
 		register = new JButton("Register");
-		purchaseOnline = new JButton("Purchase items online");
 
 		g.gridx = 0;
 		g.gridy = 1;
 		g.gridwidth = 5;
 		g.fill = GridBagConstraints.HORIZONTAL;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(register, g);
-		panel.add(register);
+		gb.setConstraints(message, g);
+		panel.add(message);
 
 		g.gridx = 0;
 		g.gridy = 2;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(purchaseOnline, g);
-		panel.add(purchaseOnline);
+		gb.setConstraints(tryAgain, g);
+		panel.add(tryAgain);
 
 		g.gridx = 0;
 		g.gridy = 3;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(close, g);
-		panel.add(close);
+		gb.setConstraints(register, g);
+		panel.add(register);
 
 		panel.setLayout(gb);
 
 		theHandler Handler = new theHandler();
+
+		tryAgain.addActionListener(Handler);
 		register.addActionListener(Handler);
-		purchaseOnline.addActionListener(Handler);
-		close.addActionListener(Handler);
 
 		Frame.add(panel);
 	}
@@ -88,17 +82,15 @@ public class CustomerGUI {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-
-			if (event.getSource() == register) {
-				new Registration(connection, fr);
-			} else if (event.getSource() == purchaseOnline) {
+			if (event.getSource() == tryAgain) {
 				new RegCustomerLogin(connection, fr);
-				// new ItemList(connection, fr);
-			} else if (event.getSource() == close) {
+				Frame.dispose();
+			} else if (event.getSource() == register) {
+				new Registration(connection, fr);
 				Frame.dispose();
 			}
+
 		}
 
 	}
-
 }

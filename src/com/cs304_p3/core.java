@@ -243,6 +243,9 @@ public class core {
 
 			hassong.insertHasSong(connect, 10, "MetalSong");
 			leadsinger.insertLeadSinger(connect, 10, "JustinBieber");
+
+			customer.insertCustomer(connect, 1, "goof", "Qais", "133113",
+					"13313");
 		} catch (Exception E) {
 		}
 

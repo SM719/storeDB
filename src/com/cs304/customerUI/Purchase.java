@@ -16,8 +16,8 @@ import java.sql.Connection;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /*
@@ -36,10 +36,8 @@ public class Purchase {
 	private JFrame Frame, fr;
 
 	private JLabel item1;
-	private JTextField ID;
-	private JPasswordField password;
 
-	private JTextField category;
+	private JTextField category, title, leadSinger;
 	private JTextField quantity;
 
 	private JButton search;
@@ -63,11 +61,10 @@ public class Purchase {
 
 		JPanel panel = new JPanel();
 
-		ID = new JTextField("Enter your user ID");
-		category = new JTextField(
-				"Enter your item category/title/lead singer(s)");
+		category = new JTextField("Enter your item category");
+		title = new JTextField("Enter your item title");
+		leadSinger = new JTextField("Enter your the lead singer");
 		quantity = new JTextField("Enter your item quantity");
-		password = new JPasswordField();
 		search = new JButton("Search");
 		cancel = new JButton("Cancel");
 
@@ -76,35 +73,41 @@ public class Purchase {
 		g.gridwidth = 5;
 		g.fill = GridBagConstraints.HORIZONTAL;
 		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(ID, g);
-		panel.add(ID);
-
-		g.gridx = 0;
-		g.gridy = 2;
-		g.insets = new Insets(10, 10, 10, 10);
-		gb.setConstraints(password, g);
-		panel.add(password);
-
-		g.gridx = 0;
-		g.gridy = 3;
-		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(category, g);
 		panel.add(category);
 
 		g.gridx = 0;
-		g.gridy = 4;
+		g.gridy = 2;
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(quantity, g);
 		panel.add(quantity);
 
 		g.gridx = 0;
+		g.gridy = 3;
+		g.insets = new Insets(10, 10, 10, 10);
+		gb.setConstraints(title, g);
+		panel.add(title);
+
+		g.gridx = 0;
+		g.gridy = 4;
+		g.insets = new Insets(10, 10, 10, 10);
+		gb.setConstraints(leadSinger, g);
+		panel.add(leadSinger);
+
+		g.gridx = 0;
 		g.gridy = 5;
+		g.insets = new Insets(10, 10, 10, 10);
+		gb.setConstraints(quantity, g);
+		panel.add(quantity);
+
+		g.gridx = 0;
+		g.gridy = 6;
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(search, g);
 		panel.add(search);
 
 		g.gridx = 0;
-		g.gridy = 6;
+		g.gridy = 7;
 		g.insets = new Insets(10, 10, 10, 10);
 		gb.setConstraints(cancel, g);
 		panel.add(cancel);
@@ -112,10 +115,12 @@ public class Purchase {
 		panel.setLayout(gb);
 
 		theHandler Handler = new theHandler();
-		ID.addActionListener(Handler);
-		password.addActionListener(Handler);
+
 		category.addActionListener(Handler);
 		quantity.addActionListener(Handler);
+		title.addActionListener(Handler);
+		leadSinger.addActionListener(Handler);
+
 		search.addActionListener(Handler);
 		cancel.addActionListener(Handler);
 
@@ -129,6 +134,58 @@ public class Purchase {
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == cancel) {
 				Frame.dispose();
+			} else if (event.getSource() == search) {
+
+				System.out.println("TEST\n");
+
+				Integer stk = Integer.valueOf(quantity.getText()
+						.toString());
+
+				String cat = category.getText()
+						.toString();
+				
+				new ItemList(connection, fr, cat , stk);
+				
+				/*
+				// ERROR CHECKING
+				if ((category.getText().equals("Enter your item category"))
+						&& (title.getText().equals("Enter your item title"))
+						&& (leadSinger.getText()
+								.equals("Enter your the lead singer"))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Please enter atleast on item descroption");
+
+				} else if ((quantity.getText().equals(""))
+						|| quantity.getText()
+								.equals("Enter your item quantity")) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Please enter a quantity");
+
+				} else {
+					// CATEGORIES:
+					// rock, pop, rap, country, classical, new age and
+					// instrumental
+
+					// IF only category is entered..
+					if ((!category.getText().equals(""))
+							&& (title.getText().equals(""))
+							&& (leadSinger.getText().equals(""))
+							&& (!quantity.getText().equals(""))) {
+
+						System.out.println("TEST\n");
+
+						Integer stk = Integer.valueOf(quantity.getText()
+								.toString());
+
+						new ItemList(connection, fr, category.getText()
+								.toString(), stk);
+
+					}
+
+				}
+				
+				*/
+
 			}
 		}
 
