@@ -68,7 +68,7 @@ public class PurchaseItem {
 			
 			while (r.next()) { 
 				UPC = r.getString("UPC");
-				System.out.printf("%-10.10s", UPC);
+				System.out.printf("\n%-10.10s", UPC);
 				
 				receiptID = r.getString("receiptID");
 				if (r.wasNull()) {

@@ -75,16 +75,48 @@ public class Purchase {
 
 				System.out.printf("%-15s", data.getColumnName(i + 1));
 			}
+
 			System.out.println(" ");
 			while (r.next()) {
 				Receipt = r.getString("receiptID");
-				System.out.printf("%-10.10s", Receipt);
+				System.out.printf("\n%-10.10s", Receipt);
 
 				date = r.getDate(2);
 				if (r.wasNull()) {
 					System.out.printf("%-20.20s", " ");
 				} else {
 					System.out.printf("%-20.20s", date);
+				}
+
+				cid = r.getString("CID");
+				System.out.printf("%-20.20s", cid);
+
+				cardnum = r.getString("cardnum");
+				if (r.wasNull()) {
+					System.out.printf("%-20.20s", " ");
+				} else {
+					System.out.printf("%-20.20s", cardnum);
+				}
+
+				eday = r.getDate(5);
+				if (r.wasNull()) {
+					System.out.printf("%-20.20s", " ");
+				} else {
+					System.out.printf("%-20.20s", eday);
+				}
+
+				exday = r.getDate(6);
+				if (r.wasNull()) {
+					System.out.printf("%-20.20s", " ");
+				} else {
+					System.out.printf("%-20.20s", exday);
+				}
+
+				dday = r.getDate(7);
+				if (r.wasNull()) {
+					System.out.printf("%-20.20s", " ");
+				} else {
+					System.out.printf("%-20.20s", dday);
 				}
 
 				cid = r.getString("CID");
