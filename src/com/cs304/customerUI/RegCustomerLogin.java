@@ -144,7 +144,7 @@ public class RegCustomerLogin {
 					}
 
 					if (log) {
-						new Purchase(connection, fr);
+						new ItemList(connection, fr);
 						Frame.dispose();
 						log = false;
 					} else {
