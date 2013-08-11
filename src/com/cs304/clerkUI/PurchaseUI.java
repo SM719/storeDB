@@ -164,7 +164,7 @@ public void actionPerformed(ActionEvent act) {
 				Purchase p = new Purchase();
 				i.deleteItem(connect, rs.getInt("upc"));
 				int newItemCount = (rs.getInt("stock") - 1);
-				i.insertItem(connect, rs.getInt("upc"), rs.getString("title"), rs.getString("type"), rs.getString("catagory"), rs.getString("company"), rs.getString("year"), rs.getString("price"), newItemCount);
+			//	i.insertItem(connect, rs.getInt("upc"), rs.getString("title"), rs.getString("type"), rs.getString("catagory"), rs.getString("company"), rs.getString("year"), rs.getString("price"), newItemCount);
 				
 				Date testdate = new Date(1, 1, 1);
 				try {
@@ -175,6 +175,7 @@ public void actionPerformed(ActionEvent act) {
 				}
 				
 				p.insertPurchase(connect, (Integer)null, cardnum.getText(), testdate, sday, sday);
+				
 			}
 			
 			/*if (rs.getInt(upc) )
