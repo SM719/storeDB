@@ -144,7 +144,7 @@ public class RegCustomerLogin {
 					}
 
 					if (log) {
-						new ItemList(connection, fr);
+						new ItemList(connection, fr, ID.getText().toString());
 						Frame.dispose();
 						log = false;
 					} else {

@@ -36,9 +36,12 @@ public class ItemList implements ActionListener {
 	JLabel m1, m2;
 	JTextField textfield;
 
-	public ItemList(Connection con, JFrame f) {
+	String CID;
+
+	public ItemList(Connection con, JFrame f, String id) {
 
 		fr = f;
+		CID = id;
 
 		connect = con;
 		Frame = new JFrame("Search");
@@ -103,6 +106,7 @@ public class ItemList implements ActionListener {
 		// TODO Auto-generated method stub
 		int t1 = 0;
 		String[] Sarray = new String[200];
+		String[] prices = new String[200];
 		Sarray[0] = "The Search Results are:           ";
 
 		if (event.getSource() == cancel) {
@@ -118,7 +122,7 @@ public class ItemList implements ActionListener {
 					connect.setAutoCommit(false);
 					Statement state = connect.createStatement();
 					ResultSet rs = state
-							.executeQuery("SELECT DISTINCT Item.upc, Item.title, Item.Stock FROM Item LEFT JOIN LeadSinger ON Item.upc = LeadSinger.UPC LEFT JOIN HasSong ON Item.upc = HasSong.upc Where Item.catagory Like"
+							.executeQuery("SELECT DISTINCT Item.upc, Item.price, Item.title, Item.Stock FROM Item LEFT JOIN LeadSinger ON Item.upc = LeadSinger.UPC LEFT JOIN HasSong ON Item.upc = HasSong.upc Where Item.catagory Like"
 									+ "'%"
 									+ textfield.getText()
 									+ "%'"
@@ -132,11 +136,14 @@ public class ItemList implements ActionListener {
 
 					while (rs.next() == true) {
 
-						Sarray[i] = "Item:" + rs.getInt("upc") + "Item name:"
+						Sarray[i] = "Item:" + "Item name:"
 								+ rs.getString("title") + "Stock:"
-								+ rs.getInt("stock") + "\n";
+								+ rs.getInt("stock") + "Price:"
+								+ rs.getString("price") + "\n";
+						prices[i] = rs.getString("price");
 
 						i++;
+
 					}
 					connect.commit();
 					state.close();
@@ -144,7 +151,9 @@ public class ItemList implements ActionListener {
 					e.printStackTrace();
 				}
 
-				JOptionPane.showMessageDialog(null, new JList(Sarray));
+				new ListUI(connect, Sarray, prices, fr, CID);
+				Frame.dispose();
+				// JOptionPane.showMessageDialog(null, new JList(Sarray));
 			}
 		}
 	}
