@@ -53,7 +53,7 @@ public class TopSellers {
 
 		JPanel panel = new JPanel();
 
-		date = new JTextField("Enter the date: ??/??/??");
+		date = new JTextField("Enter the date: yy/mm/dd");
 		num = new JTextField("Enter the number of items:");
 		display = new JButton("Search");
 		cancel = new JButton("Cancel");
@@ -99,15 +99,14 @@ public class TopSellers {
 	// takes one method, whenever an event occurs
 	private class theHandler implements ActionListener {
 
-		String d;
-		int num;
-
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == cancel) {
 				Frame.dispose();
 			} else if (event.getSource() == display) {
-				new BestSellersTable(connection, fr, d, num);
+				new BestSellersTable(connection, fr, date.getText(),
+						Integer.parseInt(num.getText()));
+				Frame.dispose();
 
 			}
 

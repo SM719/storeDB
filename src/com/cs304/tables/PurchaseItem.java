@@ -106,8 +106,8 @@ public class PurchaseItem {
 					.prepareStatement("INSERT INTO PurchaseItem VALUES (PurchaseItemCounter.nextval,?,?)");
 
 			p.setInt(1, UPC);
-			// p.setInt(1, receiptID);
 			p.setInt(2, quantity);
+			// p.setInt(1, receiptID);
 
 			p.executeUpdate();
 			connect.commit();
