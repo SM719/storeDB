@@ -14,6 +14,7 @@ import com.cs304.tables.HasSong;
 import com.cs304.tables.Item;
 import com.cs304.tables.LeadSinger;
 import com.cs304.tables.Purchase;
+import com.cs304.tables.PurchaseItem;
 
 public class core {
 	// reads cmd line
@@ -26,6 +27,8 @@ public class core {
 	private static HasSong hassong;
 	private static LeadSinger leadsinger;
 	private static Purchase purchase;
+	private static PurchaseItem pitem;
+
 	Login Login;
 
 	private static Customer customer;
@@ -51,6 +54,7 @@ public class core {
 
 				//
 				customer = new Customer();
+				pitem = new PurchaseItem();
 
 				//
 
@@ -150,6 +154,7 @@ public class core {
 			leadsinger.createLeadSinger(connect);
 			customer.createCustomer(connect);
 			purchase.createPurchase(connect);
+			pitem.createPurchaseItem(connect);
 
 		} catch (SQLException e) {
 			System.out.println("Creating Tables failed");
@@ -163,6 +168,7 @@ public class core {
 			leadsinger.dropLeadSinger(connect);
 			customer.dropCustomer(connect);
 			purchase.dropPurchase(connect);
+			pitem.dropPurchaseItem(connect);
 
 		} catch (SQLException error) {
 			System.out.println("drop table failed");

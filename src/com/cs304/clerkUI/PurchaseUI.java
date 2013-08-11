@@ -211,7 +211,8 @@ public class PurchaseUI implements ActionListener {
 					}
 					System.out.println("before currvalquery \n");
 					ResultSet rs2 = state
-							.executeQuery("SELECT * FROM PURCHASE WHERE receiptID = PurchaseCounter.currval");
+							.executeQuery("SELECT * FROM PURCHASE WHERE "
+									+ "receiptID = PurchaseCounter.currval");
 					System.out.println("after currvalquery \n");
 					while (rs2.next()) {
 						s[1] = "ReceiptID:" + rs2.getInt("receiptID")
