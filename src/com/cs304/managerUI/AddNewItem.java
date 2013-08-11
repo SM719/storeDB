@@ -204,16 +204,22 @@ public class AddNewItem {
 					new Item().insertItem(connection, Integer.parseInt(upcS),
 							titleS, typeS, categoryS, companyS, yearS, priceS,
 							Integer.parseInt(quantityS));
-					for (int i = 0; i < listSongs.length; i++) {
 
-						System.out.println(listSongs[i]);
-						new HasSong().insertHasSong(connection,
-								Integer.parseInt(upcS), listSongs[i]);
+					for (int i = 0; i < listSongs.length; i++) {
+						try {
+							System.out.println(listSongs[i]);
+							new HasSong().insertHasSong(connection,
+									Integer.parseInt(upcS), listSongs[i]);
+						} catch (IndexOutOfBoundsException e) {
+						}
 					}
 					for (int i = 0; i < listSingers.length; i++) {
+						try {
 
-						new LeadSinger().insertLeadSinger(connection,
-								Integer.parseInt(upcS), listSongs[i]);
+							new LeadSinger().insertLeadSinger(connection,
+									Integer.parseInt(upcS), listSingers[i]);
+						} catch (IndexOutOfBoundsException e) {
+						}
 					}
 
 				}
