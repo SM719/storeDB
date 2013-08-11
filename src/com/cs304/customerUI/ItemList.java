@@ -46,9 +46,10 @@ public class ItemList {
 				// connect.setAutoCommit(false);
 				// Statement state = connect.createStatement();
 				PreparedStatement p;
-				p = connect.prepareStatement("SELECT * FROM Item");
+				p = connect
+						.prepareStatement("SELECT * FROM Item WHERE catagory = ?");
 
-				// p.setString(1, category);
+				p.setString(1, category);
 				// p.setInt(2, stock);
 
 				ResultSet r = p.executeQuery();

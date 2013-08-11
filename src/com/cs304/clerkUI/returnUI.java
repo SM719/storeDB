@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 
 
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import com.cs304.tables.Return;
@@ -119,7 +120,12 @@ public class returnUI implements ActionListener {
 				
 				JOptionPane.showMessageDialog(null, "Cannot be null or is not an int");
 			} else if (isInt(textfields.getText()) == true){
+				
+				
 				GregorianCalendar calendar = new GregorianCalendar();
+				
+			//	calendar.add(Calendar.MONTH, 2);
+			//	calendar.add(Calendar.DAY_OF_MONTH, 2);
 				java.sql.Date sDate = new java.sql.Date(calendar.getTime().getTime());
 			//	System.out.println("testpoint5 \n");
 							
@@ -127,49 +133,49 @@ public class returnUI implements ActionListener {
 			
 				try{
 				
-				connect.setAutoCommit(false);
-				
-				Statement state = connect.createStatement();
-				
-				System.out.println ("Passed point 0 \n");
-				ResultSet r = state.executeQuery("SELECT COUNT(*) FROM PURCHASE WHERE receiptID =" + textfields.getText());
-				System.out.println ("passed point 1 \n");
-				while(r.next())
-				{
-					rowCount ++;
-				}
-				
-				if (rowCount == 0)
-				{
+					connect.setAutoCommit(false);
 					
-					JOptionPane.showMessageDialog(null, "receiptID does not exist");
-					System.out.println ("passed point 2 \n");
-				}else 
-				{
-					r = state.executeQuery("SELECT * FROM Purchase WHERE receiptID =" + textfields.getText());
-					System.out.println ("passed point 3 \n");
-					ResultSet r1 = state.executeQuery("SELECT * FROM PurchaseItem WHERE receiptID =" + textfields.getText());
-					System.out.println ("passed point 4 \n");
-					int upc = r1.getInt("UPC");
-					System.out.println ("passed point 5 \n");
-					ResultSet r2 = state.executeQuery("SELECT * FROM Item WHERE UPC =" + upc);
-					System.out.println ("passed point 6 \n");
-						
+					Statement state = connect.createStatement();
 					
-					if (r.getString("cardnum") == null){
-					int i = 1;	
-					s2[i] = r2.getString("UPC");
-					JOptionPane.showMessageDialog (null, new JList(s2));
-					
-					}else
+					System.out.println ("Passed point 0 \n");
+					ResultSet r = state.executeQuery("SELECT COUNT(*) FROM PURCHASE WHERE receiptID =" + textfields.getText());
+					System.out.println ("passed point 1 \n");
+					while(r.next())
 					{
-						s1[1] = r2.getString("UPC") + r.getString("card#");
-						JOptionPane.showMessageDialog (null, new JList(s1));
+						rowCount ++;
 					}
 					
-				}
-				connect.commit();
-				state.close();
+					if (rowCount == 0)
+					{
+						
+						JOptionPane.showMessageDialog(null, "receiptID does not exist");
+						System.out.println ("passed point 2 \n");
+					}else 
+					{
+						r = state.executeQuery("SELECT * FROM Purchase WHERE receiptID =" + textfields.getText());
+						System.out.println ("passed point 3 \n");
+						ResultSet r1 = state.executeQuery("SELECT * FROM PurchaseItem WHERE receiptID =" + textfields.getText());
+						System.out.println ("passed point 4 \n");
+						int upc = r1.getInt("UPC");
+						System.out.println ("passed point 5 \n");
+						ResultSet r2 = state.executeQuery("SELECT * FROM Item WHERE UPC =" + upc);
+						System.out.println ("passed point 6 \n");
+							
+						
+						if (r.getString("cardnum") == null){
+						int i = 1;	
+						s2[i] = r2.getString("UPC");
+						JOptionPane.showMessageDialog (null, new JList(s2));
+						
+						}else
+						{
+							s1[1] = r2.getString("UPC") + r.getString("card#");
+							JOptionPane.showMessageDialog (null, new JList(s1));
+						}
+						
+					}
+					connect.commit();
+					state.close();
 				}catch (SQLException error)
 				{
 					System.out.println(error.getMessage());
