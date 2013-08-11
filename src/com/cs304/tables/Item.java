@@ -198,4 +198,38 @@ public class Item {
 		}
 	}
 
+	public void updateStock(Connection connect, int stock, int upc) {
+		PreparedStatement p;
+		try {
+			p = connect
+					.prepareStatement("UPDATE item SET stock = ? WHERE UPC = ?");
+			p.setInt(1, stock);
+			p.setInt(2, upc);
+			p.executeUpdate();
+			connect.commit();
+			p.close();
+
+		} catch (SQLException Error) {
+			System.out.println("Insertion Error \n");
+			Error.printStackTrace();
+
+		}
+	}
+
+	public void updatePrice(Connection connect, String price, int upc) {
+		PreparedStatement p;
+		try {
+			p = connect
+					.prepareStatement("UPDATE item SET price = ? WHERE UPC = ?");
+			p.setString(1, price);
+			p.setInt(2, upc);
+			p.executeUpdate();
+			connect.commit();
+			p.close();
+
+		} catch (SQLException Error) {
+			System.out.println("Insertion Error \n");
+			Error.printStackTrace();
+		}
+	}
 }
