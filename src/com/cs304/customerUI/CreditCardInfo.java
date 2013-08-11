@@ -114,6 +114,7 @@ public class CreditCardInfo {
 
 				new Purchase().insertPurchase(connection, i, num.getText()
 						.toString(), eD, d, del);
+				// new PurchaseItem().insertPurchaseItem(connection, i, qty);
 			}
 
 		}
