@@ -158,8 +158,7 @@ public class Purchase {
 					Integer stk = Integer
 							.valueOf(quantity.getText().toString());
 
-					new ItemList(connection, fr, category.getText(),
-							title.getText(), leadSinger.getText(), stk);
+					new ItemList(connection, fr);
 
 				}
 
