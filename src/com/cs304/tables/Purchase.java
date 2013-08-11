@@ -157,6 +157,35 @@ public class Purchase {
 		}
 	}
 
+	public void setDate(Connection connect, int rec, String d) {
+		PreparedStatement p;
+		try {
+			// Parse String D so we can enter date we want for delivery date
+			String[] dateList = d.split("/");
+			dateList[0] = "20" + dateList[0];
+
+			GregorianCalendar calendar = new GregorianCalendar(
+					Integer.parseInt(dateList[0]),
+					Integer.parseInt(dateList[1]),
+					Integer.parseInt(dateList[2]));
+			java.sql.Date sday = new java.sql.Date(calendar.getTime().getTime());
+
+			p = connect
+					.prepareStatement("UPDATE Purchase SET deliveredD = ? WHERE receiptID = ?");
+			p.setDate(1, sday);
+			p.setInt(2, rec);
+			p.executeUpdate();
+			connect.commit();
+			p.close();
+
+		} catch (SQLException Error) {
+			System.out.println("Insertion Error \n");
+			Error.printStackTrace();
+
+		}
+
+	}
+
 	public void insertPurchase(Connection connect, int CID, String Cardnum,
 			Date expireDate, Date expectedDate, Date deliveredD) {
 		PreparedStatement p;
