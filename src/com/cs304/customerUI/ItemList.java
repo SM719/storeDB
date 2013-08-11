@@ -171,15 +171,15 @@ public class ItemList implements ActionListener {
 									+ "%'"
 									+ "OR LEADSINGER.NAME Like"
 									+ "'%"
-									+ c.getText()
+									+ lead.getText()
 									+ "%'"
 									+ "OR HASSONG.TITLE LIKE"
 									+ "'%"
-									+ c.getText() + "%'");
+									+ ti.getText() + "%'");
 
 					while (rs.next() == true) {
 
-						Sarray[i] = "Item:" + "Item name:"
+						Sarray[i] = "Item:" + rs.getString("UPC")
 								+ rs.getString("title") + "Stock:"
 								+ rs.getInt("stock") + "Price:"
 								+ rs.getString("price") + "\n";
