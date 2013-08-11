@@ -33,7 +33,9 @@ import java.util.Locale;
 
 import com.cs304.tables.Item;
 import com.cs304.tables.Purchase;
+import com.cs304.tables.PurchaseItem;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -42,9 +44,11 @@ public class PurchaseUI implements ActionListener {
 	private JFrame tframe;
 	JFrame testframe, testframe2;
 	JButton Breturn,cancel;
-	JTextField textfields,textfields2,textfields3;
-	JLabel rid,cardnum,expireDate;
+	JTextField textfields,textfields2,textfields3,textfields4;
+	JLabel rid,cardnum,expireDate,qty;
 	int rowCount;
+	int count = 0;
+	//float prices;
 
 public PurchaseUI (Connection c, JFrame frame)
 {
@@ -69,10 +73,12 @@ public PurchaseUI (Connection c, JFrame frame)
 	
 	rid = new JLabel ("UPC: ");
 	cardnum = new JLabel ("card#: ");
-	expireDate = new JLabel("Card Expire Date: ");
+	expireDate = new JLabel("Card Expire Date (yy-mm-dd): ");
+	qty = new JLabel ("Quantity: ");
 	textfields = new JTextField();
 	textfields2 = new JTextField();
 	textfields3 = new JTextField();
+	textfields4 = new JTextField();
 	
 	gcon.gridx = 0;
 	gcon.gridy = 1;
@@ -110,14 +116,27 @@ public PurchaseUI (Connection c, JFrame frame)
 	grid.setConstraints(textfields3, gcon);
 	p.add(textfields3);
 	
-	
 	gcon.gridx = 0;
 	gcon.gridy = 4;
+	
+	grid.setConstraints(qty, gcon);
+	p.add(qty);
+	
+	gcon.gridx = 1;
+	gcon.gridy = 4;
+	textfields4.setColumns(10);
+	grid.setConstraints(textfields4, gcon);
+	p.add(textfields4);
+	
+	
+	
+	gcon.gridx = 0;
+	gcon.gridy = 5;
 	grid.setConstraints(Breturn, gcon);
 	p.add(Breturn);
 	
 	gcon.gridx = 1;
-	gcon.gridy = 4;
+	gcon.gridy = 5;
 	grid.setConstraints(cancel, gcon);
 	p.add(cancel);
 	
@@ -132,6 +151,9 @@ public PurchaseUI (Connection c, JFrame frame)
 
 @Override
 public void actionPerformed(ActionEvent act) {
+	String s[] = new String[150];
+	s[0] = "Receipt: \n";
+	Float prices = new Float(0.0);
 	if (act.getSource() == cancel)
 	{
 		tframe.setVisible(true);
@@ -146,37 +168,69 @@ public void actionPerformed(ActionEvent act) {
 	if (!isInt(textfields.getText())){
 		
 		JOptionPane.showMessageDialog(null, "Cannot be null or is not an int");
-	}else if (isInt(textfields.getText())){
+	}else{
 		int upc = Integer.parseInt(textfields.getText());
 		GregorianCalendar calendar = new GregorianCalendar();
+		String formatString = "yyyy-MM-dd";
+		
+		SimpleDateFormat tDate = new SimpleDateFormat(formatString);
+	
+	//	java.sql.Date expiryDate = new java.sql.Date(tDate.parse(textfields3.getText()).getTime());
 		
 		java.sql.Date sday = new java.sql.Date(calendar.getTime().getTime());
 		
 		try {
 			connect.setAutoCommit(false);
 			Statement state = connect.createStatement();
-			ResultSet rs = state.executeQuery("SELECT * FROM Item WHERE UPC =" + textfields.getText());
+			ResultSet rs = state.executeQuery("SELECT COUNT(*) AS TOTAL FROM Item WHERE UPC =" + "'" + textfields.getText()+ "'");
 			//Have to check if item exists somehow
-			Calendar mydate = new GregorianCalendar();
-			while (rs.next())
+			while(rs.next())
 			{
-				Item i = new Item();
-				Purchase p = new Purchase();
-				i.deleteItem(connect, rs.getInt("upc"));
-				int newItemCount = (rs.getInt("stock") - 1);
-			//	i.insertItem(connect, rs.getInt("upc"), rs.getString("title"), rs.getString("type"), rs.getString("catagory"), rs.getString("company"), rs.getString("year"), rs.getString("price"), newItemCount);
-				
-				Date testdate = new Date(1, 1, 1);
-				try {
-					testdate = (Date) new SimpleDateFormat ("MMMM d, yyyy",Locale.ENGLISH).parse(textfields3.getText());
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				p.insertPurchase(connect, (Integer)null, cardnum.getText(), testdate, sday, sday);
+				count = count +rs.getInt("TOTAL");
 				
 			}
+			if (count == 0)
+			{
+				JOptionPane.showMessageDialog(null, "Item does not exist");
+			}else
+			{
+				ResultSet rs1 = state.executeQuery("SELECT * FROM ITEM WHERE UPC ="  + "'" + textfields.getText()+ "'");
+				while (rs1.next())
+				{
+					Item i = new Item();
+					Purchase p = new Purchase();
+					prices = rs1.getFloat("price");
+					PurchaseItem pi = new PurchaseItem();
+					i.deleteItem(connect, rs1.getInt("upc"));
+					int newItemCount = (rs1.getInt("stock") - Integer.parseInt(textfields4.getText()));
+					i.insertItem(connect, rs1.getInt("upc"), rs1.getString("title"), rs1.getString("type"), rs1.getString("catagory"), rs1.getString("company"), rs1.getString("year"), rs1.getFloat("price"), newItemCount);
+					
+					
+				
+					if (textfields2.getText() == "")
+					{
+						p.insertPurchase(connect, 1, null, sday, null, null);
+					}else
+					{
+						java.sql.Date expiryDate = new java.sql.Date(tDate.parse(textfields3.getText()).getTime());
+						p.insertPurchase(connect, 1, textfields2.getText(), expiryDate,null, null);
+					}
+					
+					pi.insertPurchaseItem(connect, rs1.getInt("upc"),Integer.parseInt( textfields4.getText()));
+					
+				}
+				System.out.println("before currvalquery \n");
+				ResultSet rs2 = state.executeQuery ( "SELECT * FROM PURCHASE WHERE receiptID = PurchaseCounter.currval");
+				System.out.println("after currvalquery \n");
+				while (rs2.next())
+				{
+					s[1] = "ReceiptID:" + rs2.getInt("receiptID") + "\nDate:" + rs2.getDate("bdate") + "\nItemUPC:" + rs2.getInt("upc") + "\nQuantity:" + textfields4.getText() + "\nPrice:" + Integer.parseInt(textfields4.getText())*prices + "\nCardNum:" + rs2.getString("cardnum").substring(11, 16); 
+				}
+				
+			}
+			
+			
+			
 			
 			/*if (rs.getInt(upc) )
 			{
@@ -188,6 +242,9 @@ public void actionPerformed(ActionEvent act) {
 		}catch (SQLException error)
 		{
 			System.out.println(error.getMessage());
+		}catch (ParseException e)
+		{
+			
 		}
 		
 	}

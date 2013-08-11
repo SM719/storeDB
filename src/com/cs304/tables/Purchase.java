@@ -16,7 +16,7 @@ public class Purchase {
 													+ "(receiptID int not null,"
 													+ "bdate Date,"
 													+ "CID int not null,"
-													+ "cardnum char(30),"
+													+ "cardnum char(16),"
 													+ "expiryD Date,"
 													+ "expectedD Date,"
 													+ "deliveredD Date,"

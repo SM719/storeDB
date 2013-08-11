@@ -20,12 +20,15 @@ public class PurchaseItem {
 														" FOREIGN KEY (receiptID) references Purchase(receiptID) ON DELETE CASCADE)";
 														
 	private static final String dropTablePurchaseItem = "DROP TABLE PurchaseItem CASCADE CONSTRAINTS";
+	private static final String CreateSequence = "CREATE SEQUENCE PurchaseItemCounter\n" + "START WITH 1\n" +"INCREMENT BY 1";
+	private static final String DropSequence = "DROP SEQUENCE PurchaseItemCounter";
 	
 	public void createPurchaseItem(Connection connect) throws SQLException {
 		Statement state = null;
 		try{
 			state = connect.createStatement();
 			state.executeUpdate(createTablePurchaseItem);
+			state.executeUpdate(CreateSequence);
 		} catch (SQLException Error)
 		{
 			Error.printStackTrace();
@@ -37,6 +40,7 @@ public class PurchaseItem {
 		try {
 			state = connect.createStatement();
 			state.executeUpdate(dropTablePurchaseItem);
+			state.executeUpdate(DropSequence);
 			
 		}catch (SQLException Error)
 		{
@@ -92,18 +96,18 @@ public class PurchaseItem {
 			
 	}
 	
-	public void insertPurchaseItem(Connection connect, int recID, int upc, int qty){
+	public void insertPurchaseItem(Connection connect, int upc, int qty){
 		
 		int UPC = upc;
-		int receiptID = recID;
+		//.PurchaseItem.int receiptID = recID;
 		int quantity = qty;
 		PreparedStatement p;
 		
 		try {
-			p = connect.prepareStatement("INSERT INTO PurchaseItem VALUES (?,?,?)");
+			p = connect.prepareStatement("INSERT INTO PurchaseItem VALUES (PurchaseItemCounter.nextval,?,?)");
 			
 			p.setInt(2, UPC);
-			p.setInt(1, receiptID);
+			//p.setInt(1, receiptID);
 			p.setInt(3, quantity);
 			
 			p.executeUpdate();

@@ -171,7 +171,7 @@ public class returnUI implements ActionListener {
 				//ResultSet r = state.executeQuery("SELECT * FROM PURCHASE WHERE receiptID =" + textfields.getText() + "AND(sysdate + 15 )<= ?" + sDate); 
 				ResultSet rs = state.executeQuery("SELECT COUNT(*) AS TOTAL FROM PURCHASE WHERE receiptID =" + "'" + textfields.getText()+ "'");
 				
-				System.out.println ("passed point 1 \n");
+				//System.out.println ("passed point 1 \n");
 				while(rs.next())
 				{
 					count = count +rs.getInt("TOTAL");
