@@ -245,13 +245,13 @@ public class core {
 			hassong.insertHasSong(connect, 10, "MetalSong");
 			leadsinger.insertLeadSinger(connect, 10, "JustinBieber");
 
-			customer.insertCustomer(connect, 44, "goof", "Qais", "133113",
+			customer.insertCustomer(connect, 1, "goof", "Qais", "133113",
 					"13313");
 
 			Date d1 = new Date(10, 8, 2013);
 			Date d2 = new Date(2008, 8, 15);
 			Date d3 = new Date(2008, 8, 25);
-			purchase.insertPurchase(connect, 44, "32423", d1, d2, d3);
+			purchase.insertPurchase(connect, 1, "32423", d1, d2, d3);
 			// purchase.insertPurchase(connect, CID, Cardnum, expireDate,
 			// expectedDate, deliveredD)
 		} catch (Exception E) {
