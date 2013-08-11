@@ -156,6 +156,7 @@ public class AddItems {
 										.equals("Enter item price if different:"))) {
 									new Item().updatePrice(con,
 											price.getText(), upc);
+
 								}
 							}
 						}

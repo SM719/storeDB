@@ -33,8 +33,8 @@ public class ItemList implements ActionListener {
 	String category, title, leadSinger;
 	int stock;
 	JFrame Frame;
-	JLabel m1, m2;
-	JTextField textfield;
+	JLabel quant, cat, t, ls;
+	JTextField q, c, ti, lead;
 
 	String CID;
 
@@ -60,40 +60,83 @@ public class ItemList implements ActionListener {
 		enter = new JButton("Enter");
 		cancel = new JButton("Cancel");
 
-		m1 = new JLabel("Enter Search below");
-		m2 = new JLabel("Search: ");
-		textfield = new JTextField();
+		quant = new JLabel("Enter the quantity ");
+		cat = new JLabel("Enter the catagory: ");
+		t = new JLabel("Enter the title");
+		ls = new JLabel("Enter the leadSinger: ");
+		q = new JTextField();
+		c = new JTextField();
+		ti = new JTextField();
+		lead = new JTextField();
 
 		g.gridx = 1;
 		g.gridy = 0;
-		gb.setConstraints(m1, g);
-		panel.add(m1);
+		gb.setConstraints(quant, g);
+		panel.add(quant);
 
 		g.gridx = 0;
 		g.gridy = 1;
-		gb.setConstraints(m2, g);
-		panel.add(m2);
+		gb.setConstraints(quant, g);
+		panel.add(quant);
 
 		g.gridx = 1;
 		g.gridy = 1;
-		textfield.setColumns(10);
-		gb.setConstraints(textfield, g);
-		panel.add(textfield);
+		q.setColumns(10);
+		gb.setConstraints(q, g);
+		panel.add(q);
+
+		g.gridx = 0;
+		g.gridy = 2;
+		gb.setConstraints(cat, g);
+		panel.add(cat);
+
+		g.gridx = 1;
+		g.gridy = 2;
+		c.setColumns(10);
+		gb.setConstraints(c, g);
+		panel.add(c);
+
+		g.gridx = 0;
+		g.gridy = 3;
+		gb.setConstraints(t, g);
+		panel.add(t);
 
 		g.gridx = 1;
 		g.gridy = 3;
+		ti.setColumns(10);
+		gb.setConstraints(ti, g);
+		panel.add(ti);
+
+		g.gridx = 0;
+		g.gridy = 4;
+		gb.setConstraints(ls, g);
+		panel.add(ls);
+
+		g.gridx = 1;
+		g.gridy = 4;
+		lead.setColumns(10);
+		gb.setConstraints(lead, g);
+		panel.add(lead);
+
+		g.gridx = 1;
+		g.gridy = 5;
 		g.gridwidth = 1;
 		g.fill = GridBagConstraints.HORIZONTAL;
 		gb.setConstraints(enter, g);
 		panel.add(enter);
 
-		g.gridx = 0;
-		g.gridy = 3;
+		g.gridx = 1;
+		g.gridy = 6;
 		gb.setConstraints(cancel, g);
 		panel.add(cancel);
 
 		cancel.addActionListener(this);
 		enter.addActionListener(this);
+
+		q.addActionListener(this);
+		c.addActionListener(this);
+		ti.addActionListener(this);
+		lead.addActionListener(this);
 
 		panel.setLayout(gb);
 
@@ -114,7 +157,7 @@ public class ItemList implements ActionListener {
 			Frame.dispose();
 		}
 		if (event.getSource() == enter) {
-			if (textfield.getText().equals("")) {
+			if (c.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "Invalid Search Term");
 
 			} else {
@@ -124,15 +167,15 @@ public class ItemList implements ActionListener {
 					ResultSet rs = state
 							.executeQuery("SELECT DISTINCT Item.upc, Item.price, Item.title, Item.Stock FROM Item LEFT JOIN LeadSinger ON Item.upc = LeadSinger.UPC LEFT JOIN HasSong ON Item.upc = HasSong.upc Where Item.catagory Like"
 									+ "'%"
-									+ textfield.getText()
+									+ c.getText()
 									+ "%'"
 									+ "OR LEADSINGER.NAME Like"
 									+ "'%"
-									+ textfield.getText()
+									+ c.getText()
 									+ "%'"
 									+ "OR HASSONG.TITLE LIKE"
 									+ "'%"
-									+ textfield.getText() + "%'");
+									+ c.getText() + "%'");
 
 					while (rs.next() == true) {
 
