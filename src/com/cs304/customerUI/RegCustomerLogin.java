@@ -107,9 +107,11 @@ public class RegCustomerLogin {
 
 				if ((ID.getText().equals("Enter your user ID"))
 						|| (ID.getText().equals(""))) {
-
 					JOptionPane.showMessageDialog(null,
 							"ERROR: Please enter your use ID");
+				} else if (!(ID.getText().matches("[0-9]+"))) {
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Username can contain numbers only");
 				} else if (password.getPassword().equals("")) {
 					JOptionPane.showMessageDialog(null,
 							"ERROR: Please enter a password");

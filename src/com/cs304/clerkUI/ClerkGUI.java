@@ -87,6 +87,7 @@ public class ClerkGUI  {
 			if (event.getSource() == processPurchase)
 			{
 				Frame.setVisible(false);
+				PurchaseUI purchasep = new PurchaseUI (connection,mainframe);
 				
 			} else if (event.getSource() == processReturn)
 			{
