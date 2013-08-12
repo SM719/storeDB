@@ -4,6 +4,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,11 +20,11 @@ public class ListUI {
 	private JList list, customerList;
 	private JFrame frame, fr;
 	Connection con;
+	float price = 0;
 
 	JButton sel, checkout;
 
-	public ListUI(Connection c, String[] s, final String[] pr, JFrame f,
-			String i) {
+	public ListUI(Connection c, String[] s, String[] pr, JFrame f, String i) {
 
 		final String id = i;
 		fr = f;
@@ -55,21 +58,45 @@ public class ListUI {
 			public void actionPerformed(ActionEvent event) {
 				ListModel n = customerList.getModel();
 				String[] a = new String[20];
-				// String[] p = new String[20];
-				int price = 0;
+
+				// ///
+				String[] upc = new String[20];
+				// ///
 
 				for (int i = 0; i < n.getSize(); i++) {
 					a[i] = (String) n.getElementAt(i).toString();
-					/*
-					 * if ((a[i] != null) && (pr[i] != null) &&
-					 * (a[i].contains(pr[i]))) { price +=
-					 * Integer.valueOf(pr[i]);
-					 * 
-					 * System.out.println("total price =" + price); }
-					 */
+					if (a[i] != null) {
+
+						String[] asdf = a[i].split(":");
+
+						upc[i] = asdf[1].substring(0, 1);
+						System.out.println(upc[i] + "\n");
+
+					}
+
 				}
 
-				new CreditCardInfo(con, fr, id);
+				float price = 0;
+				for (int j = 0; j < upc.length; j++) {
+					try {
+						// connection.setAutoCommit(false);
+						Statement state = con.createStatement();
+						ResultSet r = state
+								.executeQuery("SELECT * FROM Item WHERE UPC ="
+										+ upc[j]);
+						while (r.next()) {
+							String temp = r.getString("price");
+							price += Float.parseFloat(temp);
+							System.out.println(price + "\n");
+
+						}
+						con.commit();
+						state.close();
+					} catch (SQLException error) {
+						System.out.println(error.getMessage());
+					}
+				}
+				new CreditCardInfo(con, fr, id, price, upc);
 				frame.dispose();
 
 			}
@@ -77,19 +104,6 @@ public class ListUI {
 		frame.add(checkout);
 
 		frame.setVisible(true);
-		/*
-		 * list.addListSelectionListener(new ListSelectionListener() {
-		 * 
-		 * public void valueChanged(ListSelectionEvent e) {
-		 * 
-		 * if (list.getSelectedIndex() == 1) { System.out.println("1\n"); } if
-		 * (list.getSelectedIndex() == 2) { System.out.println("2\n"); }
-		 * 
-		 * }
-		 * 
-		 * });
-		 */
 
 	}
-
 }

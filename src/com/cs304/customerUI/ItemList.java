@@ -146,8 +146,8 @@ public class ItemList implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		// TODO Auto-generated method stub
-		int t1 = 0;
+
+		// int t1 = 0;
 		String[] Sarray = new String[200];
 		String[] prices = new String[200];
 		Sarray[0] = "The Search Results are:           ";
@@ -157,26 +157,100 @@ public class ItemList implements ActionListener {
 			Frame.dispose();
 		}
 		if (event.getSource() == enter) {
-			if (c.getText().equals("")) {
+			if ((c.getText().equals("")) && (ti.getText().equals(""))
+					&& (lead.getText().equals(""))) {
 				JOptionPane.showMessageDialog(null, "Invalid Search Term");
 
 			} else {
+
 				try {
 					connect.setAutoCommit(false);
 					Statement state = connect.createStatement();
 
-					ResultSet rs = state
-							.executeQuery("SELECT DISTINCT Item.upc, Item.price, Item.title, Item.Stock FROM Item LEFT JOIN LeadSinger ON Item.upc = LeadSinger.UPC LEFT JOIN HasSong ON Item.upc = HasSong.upc Where Item.catagory Like"
-									+ "'%"
-									+ c.getText()
-									+ "%'"
-									+ "AND LEADSINGER.NAME Like"
-									+ "'%"
-									+ lead.getText()
-									+ "%'"
-									+ "AND HASSONG.TITLE LIKE"
-									+ "'%"
-									+ ti.getText() + "%'");
+					ResultSet rs;
+					// C, T, L
+					if ((!c.getText().equals("")) && (!ti.getText().equals(""))
+							&& (!lead.getText().equals(""))) {
+						rs = state
+								.executeQuery("SELECT DISTINCT Item.upc, Item.price, Item.title, Item.Stock "
+										+ "FROM Item LEFT JOIN LeadSinger ON Item.upc = LeadSinger.UPC LEFT JOIN HasSong ON Item.upc = HasSong.upc "
+										+ "Where Item.catagory Like"
+										+ "'%"
+										+ c.getText()
+										+ "%'"
+										+ "AND LEADSINGER.NAME Like"
+										+ "'%"
+										+ lead.getText()
+										+ "%'"
+										+ "AND HASSONG.TITLE LIKE"
+										+ "'%"
+										+ ti.getText() + "%'");
+
+					} else if ((!c.getText().equals(""))
+							&& (!ti.getText().equals(""))
+							&& (lead.getText().equals(""))) {
+						rs = state
+								.executeQuery("SELECT DISTINCT Item.upc, Item.price, Item.title, Item.Stock "
+										+ "FROM Item LEFT JOIN LeadSinger ON Item.upc = LeadSinger.UPC LEFT JOIN HasSong ON Item.upc = HasSong.upc "
+										+ "Where Item.catagory Like"
+										+ "'%"
+										+ c.getText()
+										+ "%'"
+										+ "AND HASSONG.TITLE LIKE"
+										+ "'%"
+										+ ti.getText() + "%'");
+					} else if ((!c.getText().equals(""))
+							&& (ti.getText().equals(""))
+							&& (!lead.getText().equals(""))) {
+						rs = state
+								.executeQuery("SELECT DISTINCT Item.upc, Item.price, Item.title, Item.Stock "
+										+ "FROM Item LEFT JOIN LeadSinger ON Item.upc = LeadSinger.UPC LEFT JOIN HasSong ON Item.upc = HasSong.upc "
+										+ "Where Item.catagory Like"
+										+ "'%"
+										+ c.getText()
+										+ "%'"
+										+ "AND LEADSINGER.NAME Like"
+										+ "'%"
+										+ lead.getText() + "%'");
+					} else if ((c.getText().equals(""))
+							&& (!ti.getText().equals(""))
+							&& (!lead.getText().equals(""))) {
+						rs = state
+								.executeQuery("SELECT DISTINCT Item.upc, Item.price, Item.title, Item.Stock "
+										+ "FROM Item LEFT JOIN LeadSinger ON Item.upc = LeadSinger.UPC LEFT JOIN HasSong ON Item.upc = HasSong.upc "
+										+ "Where LEADSINGER.NAME Like"
+										+ "'%"
+										+ lead.getText()
+										+ "%'"
+										+ "AND HASSONG.TITLE LIKE"
+										+ "'%"
+										+ ti.getText() + "%'");
+					} else if ((!c.getText().equals(""))
+							&& (ti.getText().equals(""))
+							&& (lead.getText().equals(""))) {
+						rs = state
+								.executeQuery("SELECT DISTINCT Item.upc, Item.price, Item.title, Item.Stock "
+										+ "FROM Item LEFT JOIN LeadSinger ON Item.upc = LeadSinger.UPC LEFT JOIN HasSong ON Item.upc = HasSong.upc "
+										+ "Where Item.catagory Like"
+										+ "'%"
+										+ c.getText() + "%'");
+					} else if ((c.getText().equals(""))
+							&& (!ti.getText().equals(""))
+							&& (lead.getText().equals(""))) {
+						rs = state
+								.executeQuery("SELECT DISTINCT Item.upc, Item.price, Item.title, Item.Stock "
+										+ "FROM Item LEFT JOIN LeadSinger ON Item.upc = LeadSinger.UPC LEFT JOIN HasSong ON Item.upc = HasSong.upc "
+										+ "Where HASSONG.TITLE LIKE"
+										+ "'%"
+										+ ti.getText() + "%'");
+					} else {
+						rs = state
+								.executeQuery("SELECT DISTINCT Item.upc, Item.price, Item.title, Item.Stock "
+										+ "FROM Item LEFT JOIN LeadSinger ON Item.upc = LeadSinger.UPC LEFT JOIN HasSong ON Item.upc = HasSong.upc "
+										+ "Where LEADSINGER.NAME Like"
+										+ "'%"
+										+ lead.getText() + "%'");
+					}
 
 					while (rs.next() == true) {
 
