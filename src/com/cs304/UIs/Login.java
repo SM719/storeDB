@@ -142,8 +142,8 @@ public class Login implements ActionListener {
 		String connectURL = "jdbc:oracle:thin:@dbhost.ugrad.cs.ubc.ca:1522:ug";
 
 		try {
-			con = DriverManager.getConnection(connectURL, "ora_w2g8",
-					"a50071109");
+			con = DriverManager.getConnection(connectURL, "ora_o1q7",
+					"a45187101");
 
 			System.out.println("\nConnected to Oracle!");
 			return true;

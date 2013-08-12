@@ -12,8 +12,8 @@ public class PurchaseItem {
 	private Connection connect;
 
 	private static final String createTablePurchaseItem = "CREATE TABLE PurchaseItem"
-			+ "(receiptID int,"
-			+ " UPC int,"
+			+ "(receiptID int not null,"
+			+ " UPC int not null,"
 			+ " quantity int,"
 			+ " PRIMARY KEY(receiptID, UPC),"
 			+ " FOREIGN KEY (UPC) references Item(UPC) ON DELETE CASCADE,"

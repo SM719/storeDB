@@ -97,7 +97,7 @@ public class RegCustomerLogin {
 
 		String d;
 		int num;
-		boolean log = true;
+		boolean log = false;
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
@@ -123,19 +123,18 @@ public class RegCustomerLogin {
 					try {
 
 						Statement state = connection.createStatement();
-						Integer CID = Integer.valueOf(ID.getText().toString());
+						int CID = Integer.parseInt(ID.getText());
 						String p = password.getPassword().toString();
 						ResultSet r = state
 								.executeQuery("SELECT CID FROM Customer");
 						while (r.next()) {
 							int cid = r.getInt("CID");
 
-							if ((CID != cid) && !(p.equals(""))) {
-								log = false;
+							if (cid == CID) {
+								log = true;
+							} else {
 								ID.setText("");
 								password.setText("");
-							} else {
-								log = true;
 							}
 						}
 						connection.commit();
