@@ -104,8 +104,8 @@ public class TopSellers {
 			if (event.getSource() == cancel) {
 				Frame.dispose();
 			} else if (event.getSource() == display) {
-				new BestSellersTable(connection, fr, date.getText(),
-						Integer.parseInt(num.getText()));
+				int tempNum = Integer.parseInt(num.getText());
+				new BestSellersTable(connection, fr, date.getText(), tempNum);
 				Frame.dispose();
 
 			}

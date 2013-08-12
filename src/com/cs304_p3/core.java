@@ -110,6 +110,7 @@ public class core {
 					leadsinger.showLeadSinger(connect);
 					purchase.showPurchase(connect);
 					customer.showCustomer(connect);
+					pitem.showPurchaseItem(connect);
 					break;
 				case 5:
 					item.deleteItem(connect, 1);
@@ -257,7 +258,9 @@ public class core {
 			Date d1 = new Date(10, 8, 2013);
 			Date d2 = new Date(2008, 8, 15);
 			Date d3 = new Date(2008, 8, 25);
-			purchase.insertPurchase(connect, 1, "32423", d1, d2, d3);
+			// purchase.insertPurchase(connect, 1, "32423", d1, d2, d3);
+			// pitem.insertPurchaseItem(connect, 1, 10);
+
 			// purchase.insertPurchase(connect, CID, Cardnum, expireDate,
 			// expectedDate, deliveredD)
 		} catch (Exception E) {

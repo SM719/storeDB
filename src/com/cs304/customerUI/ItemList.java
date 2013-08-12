@@ -164,16 +164,17 @@ public class ItemList implements ActionListener {
 				try {
 					connect.setAutoCommit(false);
 					Statement state = connect.createStatement();
+
 					ResultSet rs = state
 							.executeQuery("SELECT DISTINCT Item.upc, Item.price, Item.title, Item.Stock FROM Item LEFT JOIN LeadSinger ON Item.upc = LeadSinger.UPC LEFT JOIN HasSong ON Item.upc = HasSong.upc Where Item.catagory Like"
 									+ "'%"
 									+ c.getText()
 									+ "%'"
-									+ "OR LEADSINGER.NAME Like"
+									+ "AND LEADSINGER.NAME Like"
 									+ "'%"
 									+ lead.getText()
 									+ "%'"
-									+ "OR HASSONG.TITLE LIKE"
+									+ "AND HASSONG.TITLE LIKE"
 									+ "'%"
 									+ ti.getText() + "%'");
 

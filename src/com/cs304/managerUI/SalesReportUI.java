@@ -87,8 +87,7 @@ public class SalesReportUI {
 			if (event.getSource() == cancel) {
 				Frame.dispose();
 			} else if (event.getSource() == display) {
-				String date;
-				new SalesReportTable(connection, fr, d);
+				new SalesReportTable(connection, fr, date.getText());
 			}
 		}
 
